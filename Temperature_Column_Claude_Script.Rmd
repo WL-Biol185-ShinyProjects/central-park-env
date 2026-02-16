@@ -1,0 +1,119 @@
+---
+title: "Temperature_Column_Claude"
+author: "Emma"
+date: "2026-02-16"
+output: html_document
+---
+# Function to extract and clean temperature values
+clean_temperature <- function(temp_string) {
+  # Handle NA values
+  if (is.na(temp_string) || temp_string == "" || temp_string == "NA") {
+    return(NA)
+  }
+  
+  # Convert to character and lowercase for easier processing
+  temp_string <- tolower(as.character(temp_string))
+  
+  # Extract numeric values using regex
+  # Look for patterns like "61º F", "Mid 40s", "70s", "Low 50s", etc.
+  
+  # Pattern 1: Direct numbers followed by º or degree symbol (e.g., "61º F", "52º F")
+  if (grepl("\\d+\\s*[ºo°]", temp_string)) {
+    temp <- as.numeric(sub(".*?(\\d+)\\s*[ºo°].*", "\\1", temp_string))
+    return(temp)
+  }
+  
+  # Pattern 2: "mid 40s", "low 50s", "high 60s"
+  if (grepl("(low|mid|high)\\s*(\\d+)s?", temp_string)) {
+    match <- regmatches(temp_string, regexec("(low|mid|high)\\s*(\\d+)s?", temp_string))[[1]]
+    if (length(match) >= 3) {
+      base_temp <- as.numeric(match[3])
+      modifier <- match[2]
+      
+      # Adjust based on modifier
+      if (modifier == "low") {
+        return(base_temp + 2)  # e.g., "low 50s" = 52
+      } else if (modifier == "mid") {
+        return(base_temp + 5)  # e.g., "mid 40s" = 45
+      } else if (modifier == "high") {
+        return(base_temp + 7)  # e.g., "high 60s" = 67
+      }
+    }
+  }
+  
+  # Pattern 3: Just "40s", "50s", "60s", "70s"
+  if (grepl("\\d+s", temp_string) && !grepl("(low|mid|high)", temp_string)) {
+    temp <- as.numeric(sub(".*?(\\d+)s.*", "\\1", temp_string))
+    return(temp + 5)  # Default to mid-range (e.g., "60s" = 65)
+  }
+  
+  # Pattern 4: Plain numbers (e.g., "70", "65")
+  if (grepl("^\\d+$", temp_string)) {
+    return(as.numeric(temp_string))
+  }
+  
+  # Pattern 5: Numbers with ~ or other prefixes (e.g., "~low 50s")
+  if (grepl("~", temp_string)) {
+    temp_string <- gsub("~", "", temp_string)
+    # Recursively call the function on the cleaned string
+    return(clean_temperature(temp_string))
+  }
+  
+  # If no pattern matches, return NA
+  return(NA)
+}
+
+# Read the CSV file
+# Change this path to your actual file location
+data <- read.csv("central_park.csv", stringsAsFactors = FALSE)
+
+# Apply the cleaning function to the temperature column
+# The column is named "Sighter.Observed.Weather.Data" in R (dots replace spaces)
+data$Temperature_F <- sapply(data$Sighter.Observed.Weather.Data, clean_temperature)
+
+# Display summary of the conversion
+cat("\n=== Temperature Conversion Summary ===\n")
+cat("Original column: Sighter.Observed.Weather.Data\n")
+cat("New column: Temperature_F\n\n")
+
+cat("Sample of original values:\n")
+print(head(data$Sighter.Observed.Weather.Data, 10))
+
+cat("\nSample of converted values:\n")
+print(head(data$Temperature_F, 10))
+
+cat("\nSummary statistics of Temperature_F:\n")
+print(summary(data$Temperature_F))
+
+cat("\nNumber of NA values:\n")
+cat("Original NAs:", sum(is.na(data$Sighter.Observed.Weather.Data) | 
+                           data$Sighter.Observed.Weather.Data == "" | 
+                           data$Sighter.Observed.Weather.Data == "NA"), "\n")
+cat("After conversion:", sum(is.na(data$Temperature_F)), "\n")
+
+# Save the cleaned dataset
+write.csv(data, "central_park_cleaned.csv", row.names = FALSE)
+cat("\n✓ Cleaned data saved to: central_park_cleaned.csv\n")
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
