@@ -3,3 +3,4 @@ squirrel_data <- read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data_202
 view(squirrel_data)
 hectare_data <- read_csv("2018_Central_Park_Squirrel_Census_-_Hectare_Data_20260216.csv")
 view(hectare_data)
+story_data <- read_csv("2018_Central_Park_Squirrel_Census_-_Stories_20260216 (1).csv")
