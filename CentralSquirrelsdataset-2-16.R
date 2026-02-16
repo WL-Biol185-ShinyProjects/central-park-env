@@ -1,0 +1,5 @@
+library(tidyverse)
+squirrel_data <- read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data_20260216.csv")
+view(squirrel_data)
+hectare_data <- read_csv("2018_Central_Park_Squirrel_Census_-_Hectare_Data_20260216.csv")
+view(hectare_data)
