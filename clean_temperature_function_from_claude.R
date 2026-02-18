@@ -1,8 +1,6 @@
 #From Claude: making a function to sort through data in 'Sighter Observed Weather Data' to get numeric number column called 'numerical_temp'
 #trying to fix parenthesis problems so adding a new line
 
-central_park <- read.csv("central_park.csv", stringsAsFactors=FALSE)
-
 clean_temperature <- function(temp_string) {
   # Handle NA values
   if (is.na(temp_string) || temp_string == "" || temp_string == "NA") {
@@ -61,10 +59,35 @@ clean_temperature <- function(temp_string) {
   return(NA)
 }
 
+# Read the CSV file
+# Change this path to your actual file location
+central_park_numeric_temp <- read.csv("central_park.csv", stringsAsFactors = FALSE)
 
+# Apply the cleaning function to the temperature column
+# The column is named "Sighter.Observed.Weather.Data" in R (dots replace spaces)
+central_park_numeric_temp$numeric_temp <- sapply(central_park_numeric_temp$Sighter.Observed.Weather.Data, clean_temperature)
 
+# Display summary of the conversion
+cat("\n=== Temperature Conversion Summary ===\n")
+cat("Original column: Sighter.Observed.Weather.Data\n")
+cat("New column: numeric_temp\n\n")
 
-#creating the column using sapply
-#may need to click over on columns to get to column 51 because can only show 50 in one window
+cat("Sample of original values:\n")
+print(head(central_park_numeric_temp$Sighter.Observed.Weather.Data, 10))
 
-central_park$numerical_temp <- sapply(central_park$`Sighter Observed Weather Data`,clean_temperature)
+cat("\nSample of converted values:\n")
+print(head(central_park_numeric_temp$numeric_temp, 10))
+
+cat("\nSummary statistics of numeric_temp:\n")
+print(summary(central_park_numeric_temp$numeric_temp))
+
+cat("\nNumber of NA values:\n")
+cat("Original NAs:", sum(is.na(central_park_numeric_temp$Sighter.Observed.Weather.Data) | 
+                           central_park_numeric_temp$Sighter.Observed.Weather.Data == "" | 
+                           central_park_numeric_temp$Sighter.Observed.Weather.Data == "NA"), "\n")
+cat("After conversion:", sum(is.na(central_park_numeric_temp$numeric_temp)), "\n")
+
+# Save the cleaned dataset
+write.csv(data, "central_park_numeric_temp.csv", row.names = FALSE)
+cat("\n✓ Cleaned data saved to: central_park_numeric_temp.csv\n")
+
