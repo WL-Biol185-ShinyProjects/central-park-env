@@ -57,3 +57,8 @@ clean_temperature <- function(temp_string) {
   # If no pattern matches, return NA
   return(NA)
 }
+
+#creating the column using sapply
+#may need to click over on columns to get to column 51 because can only show 50 in one window
+
+central_park$numerical_temp <- sapply(central_park$`Sighter Observed Weather Data`,clean_temperature)
