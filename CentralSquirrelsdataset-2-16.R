@@ -8,8 +8,15 @@ story_data <- read_csv("~/central-park-env/raw_data/2018_Central_Park_Squirrel_C
 
 df_list <- list(squirrel_data, hectare_data, story_data) # add all your dataframes to a list
 
-central_park_tf <- df_list %>%
+central_park_og <- df_list %>%
   reduce(inner_join, by = c("Hectare", "Shift", "Date"))
 
+central_park_obs <- central_park_og %>%
+  pivot_longer(
+    cols = c(Running, Chasing, Climbing, Eating, Foraging),
+    names_to = "activity",
+    values_to = "did_activity"
+  ) %>%
+  select("Unique Squirrel ID", "activity", "did_activity")
 
-  
+View(central_park_obs)
