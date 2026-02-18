@@ -1,4 +1,5 @@
 #From Claude: making a function to sort through data in 'Sighter Observed Weather Data' to get numeric number column called 'numerical_temp'
+#trying to fix parenthesis problems so adding a new line
 
 central_park <- read.csv("central_park.csv", stringsAsFactors=FALSE)
 
