@@ -1,5 +1,7 @@
 #From Claude: making a function to sort through data in 'Sighter Observed Weather Data' to get numeric number column called 'numerical_temp'
 
+central_park <- read.csv("central_park.csv", stringsAsFactors=FALSE)
+
 clean_temperature <- function(temp_string) {
   # Handle NA values
   if (is.na(temp_string) || temp_string == "" || temp_string == "NA") {
@@ -57,6 +59,9 @@ clean_temperature <- function(temp_string) {
   # If no pattern matches, return NA
   return(NA)
 }
+
+
+
 
 #creating the column using sapply
 #may need to click over on columns to get to column 51 because can only show 50 in one window
