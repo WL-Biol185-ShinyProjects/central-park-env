@@ -11,4 +11,4 @@ df_list <- list(squirrel_data, hectare_data, story_data) # add all your datafram
 central_park <- df_list %>%
   reduce(inner_join, by = c("Hectare", "Shift", "Date"))
 
-view(central_park)
+View(central_park)
