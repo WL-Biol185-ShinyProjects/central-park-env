@@ -19,7 +19,6 @@ central_park_act_obs <- central_park_og %>%
   ) %>%
   select("Unique Squirrel ID", "activity", "did_activity")
 
-View(central_park_noise_obs)
 central_park_noise_obs <- central_park %>%
   pivot_longer(
     cols = c(Kuks, Quaas, Moans),
