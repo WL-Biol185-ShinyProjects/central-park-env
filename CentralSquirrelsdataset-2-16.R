@@ -11,7 +11,7 @@ df_list <- list(squirrel_data, hectare_data, story_data) # add all your datafram
 central_park_og <- df_list %>%
   reduce(inner_join, by = c("Hectare", "Shift", "Date"))
 
-central_park_obs <- central_park_og %>%
+central_park_act_obs <- central_park_og %>%
   pivot_longer(
     cols = c(Running, Chasing, Climbing, Eating, Foraging),
     names_to = "activity",
@@ -19,4 +19,27 @@ central_park_obs <- central_park_og %>%
   ) %>%
   select("Unique Squirrel ID", "activity", "did_activity")
 
-View(central_park_obs)
+View(central_park_noise_obs)
+central_park_noise_obs <- central_park %>%
+  pivot_longer(
+    cols = c(Kuks, Quaas, Moans),
+    names_to = "noise",
+    values_to = "made_noise"
+  ) %>%
+  select("Unique Squirrel ID", "noise", "made_noise")
+
+central_park_tailbeh_obs <- central_park %>%
+  pivot_longer(
+    cols = c("Tail flags", "Tail twitches"),
+    names_to = "tailbehavior",
+    values_to = "did_tailbehavior"
+  ) %>%
+  select("Unique Squirrel ID", "tailbehavior", "did_tailbehavior")
+
+central_park_attitude <- central_park %>%
+  pivot_longer(
+    cols = c("Approaches", "Indifferent"),
+    names_to = "attitude",
+    values_to = "did_attitude"
+  ) %>%
+  select("Unique Squirrel ID", "attitude", "did_attitude")
