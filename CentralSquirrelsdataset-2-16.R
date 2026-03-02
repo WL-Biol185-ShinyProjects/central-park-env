@@ -38,7 +38,7 @@ central_park_tailbeh_obs <- central_park %>%
 
 central_park_attitude <- central_park %>%
   pivot_longer(
-    cols = c("Approaches", "Indifferent"),
+    cols = c("Approaches", "Indifferent", "Runs from"),
     names_to = "attitude",
     values_to = "did_attitude"
   ) %>%
