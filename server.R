@@ -7,7 +7,7 @@ function(input, output) {
     central_park_attitude %>%
       filter(did_attitude == TRUE) %>%
       ggplot(aes(x = attitude)) +
-      geom_bar(fill = "#2E86AB", width = 0.6) +
+      geom_bar(fill = "#652A0E", width = 0.6) +
       scale_y_continuous(labels = scales::comma) +
       labs(
         y = "Number of Squirrels",
