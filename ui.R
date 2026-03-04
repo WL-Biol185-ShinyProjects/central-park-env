@@ -1,10 +1,15 @@
 library(shiny)
-library(bslib)
 
 
-ui <- page_sidebar(
-  title = "Squirrel Exploration",
-  sidebar = sidebar("Activities"),
-  "main contents"
-)
+dashboardPage(
+  dashboardHeader(title = "Squirrel Exploration in NYC"),
+  dashboardSidebar(title = "What's the squirrel doing?"),
+  dashboardBody(
+    # Boxes need to be put in a row (or column)
+    fluidRow(
+      box(plotOutput("plot1", height = 250)),
+      
+      )
+    )
+  )
 
