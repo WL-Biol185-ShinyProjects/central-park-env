@@ -22,8 +22,7 @@ function(input, output) {
         panel.grid.major.x = element_blank()
       )
   })
-<<<<<<< HEAD
-=======
+
   output$squirrel_plot2 <- renderPlot({ 
     central_park_attitude %>%
       filter(did_attitude == TRUE) %>%
@@ -45,6 +44,6 @@ function(input, output) {
   })
   
 
->>>>>>> 2ad62922310998540f5bb97c4ca5984266571d4b
+
 }
 
