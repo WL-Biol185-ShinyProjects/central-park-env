@@ -19,7 +19,7 @@ central_park_act_obs <- central_park_og %>%
   ) %>%
   select("Unique Squirrel ID", "activity", "did_activity")
 
-central_park_noise_obs <- central_park %>%
+central_park_noise_obs <- central_park_og %>%
   pivot_longer(
     cols = c(Kuks, Quaas, Moans),
     names_to = "noise",
@@ -27,7 +27,7 @@ central_park_noise_obs <- central_park %>%
   ) %>%
   select("Unique Squirrel ID", "noise", "made_noise")
 
-central_park_tailbeh_obs <- central_park %>%
+central_park_tailbeh_obs <- central_park_og %>%
   pivot_longer(
     cols = c("Tail flags", "Tail twitches"),
     names_to = "tailbehavior",
@@ -35,7 +35,7 @@ central_park_tailbeh_obs <- central_park %>%
   ) %>%
   select("Unique Squirrel ID", "tailbehavior", "did_tailbehavior")
 
-central_park_attitude <- central_park %>%
+central_park_attitude <- central_park_og %>%
   pivot_longer(
     cols = c("Approaches", "Indifferent", "Runs from"),
     names_to = "attitude",
