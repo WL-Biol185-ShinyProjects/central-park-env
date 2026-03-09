@@ -38,8 +38,7 @@ function(input, output) {
         axis.title = element_text(face = "bold")   # makes both axis labels bold
       )
   })
-<<<<<<< HEAD
-  
+
   output$squirrel_plot5 <- renderPlot({
     central_park_noise_obs %>%
       filter(made_noise == TRUE) %>%
@@ -49,8 +48,9 @@ function(input, output) {
       geom_text(aes(label = scales::comma(n)), hjust = -0.2, fontface = "bold") +
       scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
       labs(title = "Bar Graph - Squirrel Noise", 
-           x = "Number of Squirrels", y = "Noise") +
-=======
+           x = "Number of Squirrels", y = "Noise")+
+                                      })
+  
   output$squirrel_plot3 <- renderPlot({ 
     central_park_tailbeh_obs %>%
       filter(did_tailbehavior == TRUE) %>%
@@ -80,15 +80,11 @@ function(input, output) {
       scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
       labs(title = "Bar Graph - Squirrel Tail Behavior", 
            x = "Number of Squirrels", y = "Tail Bevavior") +
->>>>>>> 73abc1f12f11c6dc4d09599fcfad8e116d7d8db4
       theme_minimal() +
       theme(
         plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
         axis.title = element_text(face = "bold")   # makes both axis labels bold
       )
   })
-<<<<<<< HEAD
-=======
-  
->>>>>>> 73abc1f12f11c6dc4d09599fcfad8e116d7d8db4
+
 }
