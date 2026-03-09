@@ -49,7 +49,7 @@ function(input, output) {
       scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
       labs(title = "Bar Graph - Squirrel Noise", 
            x = "Number of Squirrels", y = "Noise")+
-                                      })
+                                      )
   
   output$squirrel_plot3 <- renderPlot({ 
     central_park_tailbeh_obs %>%
