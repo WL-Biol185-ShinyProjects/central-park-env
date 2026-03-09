@@ -26,10 +26,18 @@ dashboardPage(skin = "green",
       tabItem(tabName = "where_are_they"),
       tabItem(tabName = "Attitude",
               fluidRow(
-                box(plotOutput("squirrel_plot4", height = 250)), box(plotOutput("squirrel_plot2", height = 250))
-              ),
+                box(plotOutput("squirrel_plot1", height = 250)), box(plotOutput("squirrel_plot2", height = 250))
+              )),
+      tabItem(tabName = "Tail_Behavior",
+              fluidRow(
+                box(plotOutput("squirrel_plot3")), box(plotOutput("squirrel_plot4"))
+              )),    
+      tabItem(tabName = "Noise",
+               fluidRow(
+                 box(plotOutput("squirrel_plot5")), box(plotOutput("squirrel_plot6"))
+              )),    
       tabItem(tabName = "park_conditions")
+      )
     )
-  )
 )
-)
+

@@ -69,7 +69,7 @@ function(input, output) {
         legend.title = element_text(face = "bold")
       )
   })
-  output$squirrel_plot5 <- renderPlot({
+  output$squirrel_plot4 <- renderPlot({
     central_park_tailbeh_obs %>%
       filter(did_tailbehavior == TRUE) %>%
       count(tailbehavior) %>%
