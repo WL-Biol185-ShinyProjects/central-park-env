@@ -2,7 +2,7 @@ library(shinydashboard)
 library(shiny)
 
 
-dashboardPage(skin = "red",
+dashboardPage(skin = "white",
 
   dashboardHeader(title = "Squirrel Exploration"),
   dashboardSidebar(title = "What's the squirrel doing?",
