@@ -1,8 +1,10 @@
 library(shinydashboard)
+library(shiny)
+
 
 dashboardPage(
   dashboardHeader(title = "Squirrel Exploration"),
-  dashboardSidebar(
+  dashboardSidebar(title = "What's the squirrel doing?",
     sidebarMenu(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Meet the Squirrels", tabName = "Meet the Squirrels", icon = icon("tree")),
@@ -11,7 +13,8 @@ dashboardPage(
   ),
   dashboardBody(
     fluidRow(
-      box(plotOutput("squirrel_plot", height = 250)), box(plotOutput("squirrel_plot2", height = 250)
+      box(plotOutput("squirrel_plot", height = 250)), box(plotOutput("squirrel_plot2", height = 250))
     )
   )
-))
+)
+
