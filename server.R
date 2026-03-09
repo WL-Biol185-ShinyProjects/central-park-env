@@ -38,7 +38,7 @@ function(input, output) {
         axis.title = element_text(face = "bold")   # makes both axis labels bold
       )
   })
-  output$squirrel_plot5 <- renderPlot({
+  output$squirrel_plot5 <- renderPlot(
     central_park_noise_obs %>%
       filter(made_noise == TRUE) %>%
       count(noise) %>%
@@ -48,8 +48,8 @@ function(input, output) {
       scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
       labs(title = "Bar Graph - Squirrel Noise", 
            x = "Number of Squirrels", y = "Noise") +
-                                      ) 
-                                  })
+                                       
+                                  
   output$squirrel_plot3 <- renderPlot({ 
     central_park_tailbeh_obs %>%
       filter(did_tailbehavior == TRUE) %>%
