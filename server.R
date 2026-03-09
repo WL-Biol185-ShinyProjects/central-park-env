@@ -57,11 +57,11 @@ function(input, output) {
         legend.title = element_text(face = "bold")
       )
   })
-  output$squirrel_plot4 <- renderPlot({
+  output$squirrel_plot5 <- renderPlot({
     central_park_tailbeh_obs %>%
       filter(did_tailbehavior == TRUE) %>%
       count(tailbehavior) %>%
-      ggplot(aes(x = n, y = reorder(attitude, n))) +
+      ggplot(aes(x = n, y = reorder(tailbehavior, n))) +
       geom_bar(stat = "identity", fill = "#652A0E", width = 0.5) +
       geom_text(aes(label = scales::comma(n)), hjust = -0.2, fontface = "bold") +
       scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
