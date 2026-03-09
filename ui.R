@@ -8,7 +8,8 @@ dashboardPage(skin = "green",
   dashboardSidebar(title = "What's the squirrel doing?",
     sidebarMenu(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-      menuItem("Widgets", tabName = "widgets", icon = icon("th"))
+      menuItem("Meet the Squirrels", tabName = "Meet the Squirrels", icon = icon("tree")),
+      menuItem("Where Are They", tabName = "Where Are They", icon = icon("map"))
     )
   ),
   dashboardBody(
