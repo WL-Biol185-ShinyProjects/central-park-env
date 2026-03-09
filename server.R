@@ -3,7 +3,7 @@ library(ggplot2)
 library(tidyverse)
 
 function(input, output) {
-  output$squirrel_plot2 <- renderPlot({ 
+  output$squirrel_plot1 <- renderPlot({ 
     central_park_attitude %>%
       filter(did_attitude == TRUE) %>%
       count(attitude) %>%                                    # count per attitude
@@ -22,7 +22,7 @@ function(input, output) {
         legend.title = element_text(face = "bold")
       )
   })
-  output$squirrel_plot4 <- renderPlot({
+  output$squirrel_plot2 <- renderPlot({
     central_park_attitude %>%
       filter(did_attitude == TRUE) %>%
       count(attitude) %>%
@@ -32,6 +32,23 @@ function(input, output) {
       scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
       labs(title = "Bar Graph - Squirrel Attitude when Approached by Human", 
            x = "Number of Squirrels", y = "Attitude") +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+        axis.title = element_text(face = "bold")   # makes both axis labels bold
+      )
+  })
+  
+  output$squirrel_plot5 <- renderPlot({
+    central_park_noise_obs %>%
+      filter(made_noise == TRUE) %>%
+      count(noise) %>%
+      ggplot(aes(x = n, y = reorder(noise, n))) +
+      geom_bar(stat = "identity", fill = "#652A0E", width = 0.5) +
+      geom_text(aes(label = scales::comma(n)), hjust = -0.2, fontface = "bold") +
+      scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
+      labs(title = "Bar Graph - Squirrel Noise", 
+           x = "Number of Squirrels", y = "Noise") +
       theme_minimal() +
       theme(
         plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
