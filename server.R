@@ -12,7 +12,7 @@ function(input, output) {
       labs(
         y = "Number of Squirrels",
         x = "Attitude",
-        title = "Squirrel Attitude when Approached"
+        title = "Bar Graph - Squirrel Attitude when Approached by Human"
       ) +
       theme_minimal() +
       theme(
@@ -35,7 +35,7 @@ function(input, output) {
       geom_text(aes(label = label),
                 position = position_stack(vjust = 0.5),      # centers labels in slices
                 color = "white", fontface = "bold", size = 5) +
-      labs(title = "Squirrel Attitude when Approached", fill = "Attitude") +
+      labs(title = "Pie Chart - Squirrel Attitude when Approached by Human", fill = "Attitude") +
       theme_void() +                                         # removes axes/gridlines
       theme(
         plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
