@@ -14,7 +14,7 @@ dashboardPage(skin = "green",
   ),
   dashboardBody(
     fluidRow(
-      box(plotOutput("squirrel_plot", height = 250)), box(plotOutput("squirrel_plot2", height = 250))
+      box(plotOutput("squirrel_plot4", height = 250)), box(plotOutput("squirrel_plot2", height = 250))
     )
   )
 )

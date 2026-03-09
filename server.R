@@ -3,26 +3,6 @@ library(ggplot2)
 library(tidyverse)
 
 function(input, output) {
-  output$squirrel_plot <- renderPlot({  # matches "squirrel_plot" in ui
-    central_park_attitude %>%
-      filter(did_attitude == TRUE) %>%
-      ggplot(aes(x = attitude)) +
-      geom_bar(fill = "#652A0E", width = 0.6) +
-      scale_y_continuous(labels = scales::comma) +
-      labs(
-        y = "Number of Squirrels",
-        x = "Attitude",
-        title = "Bar Graph - Squirrel Attitude when Approached by Human"
-      ) +
-      theme_minimal() +
-      theme(
-        plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
-        axis.text = element_text(size = 11),
-        axis.title = element_text(size = 12, face = "bold"),
-        panel.grid.major.x = element_blank()
-      )
-  })
-
   output$squirrel_plot2 <- renderPlot({ 
     central_park_attitude %>%
       filter(did_attitude == TRUE) %>%
@@ -42,7 +22,16 @@ function(input, output) {
         legend.title = element_text(face = "bold")
       )
   })
-  
-
-
+  output$squirrel_plot4 <- renderPlot({
+    central_park_attitude %>%
+      filter(did_attitude == TRUE) %>%
+      count(attitude) %>%
+      ggplot(aes(x = n, y = reorder(attitude, n))) +   # reorder puts biggest bar on top
+      geom_bar(stat = "identity", fill = "#652A0E", width = 0.5) +
+      geom_text(aes(label = scales::comma(n)), hjust = -0.2, fontface = "bold") +
+      scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
+      labs(title = "Squirrel Attitude when Approached", x = "Number of Squirrels", y = "Attitude") +
+      theme_minimal() +
+      theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14))
+  })
 }
