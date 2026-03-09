@@ -30,7 +30,7 @@ function(input, output) {
       geom_bar(stat = "identity", fill = "#652A0E", width = 0.5) +
       geom_text(aes(label = scales::comma(n)), hjust = -0.2, fontface = "bold") +
       scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
-      labs(title = "Squirrel Attitude when Approached", x = "Number of Squirrels", y = "Attitude") +
+      labs(title = "Bar Graph - Squirrel Attitude when Approached by Human", x = "Number of Squirrels", y = "Attitude") +
       theme_minimal() +
       theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14))
   })
