@@ -26,12 +26,16 @@ function(input, output) {
     central_park_attitude %>%
       filter(did_attitude == TRUE) %>%
       count(attitude) %>%
-      ggplot(aes(x = n, y = reorder(attitude, n))) +   # reorder puts biggest bar on top
+      ggplot(aes(x = n, y = reorder(attitude, n))) +
       geom_bar(stat = "identity", fill = "#652A0E", width = 0.5) +
       geom_text(aes(label = scales::comma(n)), hjust = -0.2, fontface = "bold") +
       scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
-      labs(title = "Bar Graph - Squirrel Attitude when Approached by Human", x = "Number of Squirrels", y = "Attitude") +
+      labs(title = "Bar Graph - Squirrel Attitude when Approached by Human", 
+           x = "Number of Squirrels", y = "Attitude") +
       theme_minimal() +
-      theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14))
+      theme(
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+        axis.title = element_text(face = "bold")   # makes both axis labels bold
+      )
   })
 }
