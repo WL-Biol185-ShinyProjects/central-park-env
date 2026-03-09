@@ -24,7 +24,7 @@ dashboardPage(skin = "green",
       tabItem(tabName = "dashboard"),
       tabItem(tabName = "meet_the_squirrels"),
       tabItem(tabName = "where_are_they"),
-      tabItem(tabName = "what_are_they_doing",
+      tabItem(tabName = "Attitude",
               fluidRow(
                 box(plotOutput("squirrel_plot1", height = 250)), box(plotOutput("squirrel_plot2", height = 250)), box(plotOutput("squirrel_plot5") 
               )
