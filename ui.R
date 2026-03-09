@@ -8,9 +8,9 @@ dashboardPage(skin = "green",
   dashboardSidebar(title = "Squirrels in Central Park",
     sidebarMenu(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-      menuItem("Meet the Squirrels", tabName = "meet_the_squirrels", icon = icon("tree")),
-      menuItem("Where Are They", tabName = "where_are_they", icon = icon("map")),
-      menuItem("What are They Doing", icon = icon("walking"), 
+      menuItem("Meet the Squirrels!", tabName = "meet_the_squirrels", icon = icon("tree")),
+      menuItem("Where Are They?", tabName = "where_are_they", icon = icon("map")),
+      menuItem("What are They Doing?", icon = icon("walking"), 
           menuSubItem("Attitude", tabName = "Attitude"),
           menuSubItem("Activity", tabName = "Activity"),
           menuSubItem("Tail Behavior", tabName = "Tail_Behavior"),
@@ -26,7 +26,7 @@ dashboardPage(skin = "green",
       tabItem(tabName = "where_are_they"),
       tabItem(tabName = "Attitude",
               fluidRow(
-                box(plotOutput("squirrel_plot1", height = 250)), box(plotOutput("squirrel_plot2", height = 250))
+                box(plotOutput("squirrel_plot1")), box(plotOutput("squirrel_plot2"))
               )),
       tabItem(tabName = "Tail_Behavior",
               fluidRow(
@@ -36,6 +36,10 @@ dashboardPage(skin = "green",
                fluidRow(
                  box(plotOutput("squirrel_plot5")), box(plotOutput("squirrel_plot6"))
               )),    
+      tabItem(tabName = "Activity",
+              fluidRow(
+                box(plotOutput("squirrel_plot7")), box(plotOutput("squirrel_plot8"))
+              )),
       tabItem(tabName = "park_conditions")
       )
     )
