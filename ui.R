@@ -5,11 +5,13 @@ library(shiny)
 dashboardPage(skin = "green",
 
   dashboardHeader(title = "Squirrel Exploration"),
-  dashboardSidebar(title = "What's the squirrel doing?",
+  dashboardSidebar(title = "Squirrels in Central Park",
     sidebarMenu(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Meet the Squirrels", tabName = "Meet the Squirrels", icon = icon("tree")),
-      menuItem("Where Are They", tabName = "Where Are They", icon = icon("map"))
+      menuItem("Where Are They", tabName = "Where Are They", icon = icon("map")),
+      menuItem("What are They Doing", tabName = "What are They Doing", icon = icon("walking")),
+      menuItem("Park Conditions", tabName = "Park Conditions", icon = icon("sun"))
     )
   ),
   dashboardBody(
