@@ -10,8 +10,13 @@ dashboardPage(skin = "green",
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Meet the Squirrels", tabName = "meet_the_squirrels", icon = icon("tree")),
       menuItem("Where Are They", tabName = "where_are_they", icon = icon("map")),
-      menuItem("What are They Doing", tabName = "what_are_they_doing", icon = icon("walking")),
-      menuItem("Park Conditions", tabName = "park_conditions", icon = icon("sun"))
+      menuItem("What are They Doing", icon = icon("walking"), 
+          menuSubItem("Attitude", tabName = "Attitude"),
+          menuSubItem("Activity", tabName = "Activity"),
+          menuSubItem("Tail Behavior", tabName = "Tail_Behavior"),
+          menuSubItem("Noise", tabName = "Noise")
+      ),
+      menuItem("Park Conditions", tabName = "park_conditions", icon = icon("cloud"))
     )
   ),
   dashboardBody(
