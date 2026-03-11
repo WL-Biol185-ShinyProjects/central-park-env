@@ -5,7 +5,6 @@ library(tidyverse)
 function(input, output) {
   
   output$squirrel_plot1 <- renderPlot({
-    print("making plot 1")
     central_park_attitude %>%
       filter(did_attitude == TRUE) %>%
       count(attitude) %>%
@@ -115,7 +114,7 @@ function(input, output) {
         legend.title = element_text(face = "bold")
       )
   })
-  
+
   output$squirrel_plot7 <- renderPlot({
     central_park_act_obs %>%
       filter(did_activity == TRUE) %>%
@@ -152,5 +151,5 @@ function(input, output) {
         legend.title = element_text(face = "bold")
       )
   })  
-  
+
 }

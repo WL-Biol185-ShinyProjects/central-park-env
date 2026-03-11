@@ -26,5 +26,3 @@ source("park_conditions.R")
             )
   ),
   )
-
-
