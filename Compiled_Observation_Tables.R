@@ -11,6 +11,8 @@ df_list <- list(squirrel_data, hectare_data, story_data) # add all your datafram
 central_park_og <- df_list %>%
   reduce(inner_join, by = c("Hectare", "Shift", "Date"))
 
+write.csv(central_park_og, "central_park_og.csv", row.names = FALSE)
+
 central_park_act_obs <- central_park_og %>%
   pivot_longer(
     cols = c(Running, Chasing, Climbing, Eating, Foraging),
