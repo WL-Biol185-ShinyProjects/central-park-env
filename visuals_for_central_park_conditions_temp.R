@@ -7,7 +7,7 @@ library(ggplot2)
     summarise(avg_temp = mean(numeric_temp, na.rm = TRUE)) %>%
     ggplot(aes(proper_date_format, avg_temp, fill = Shift)) +
     geom_bar(stat = "identity", position = "dodge") +
-    labs(title = "Daily Average Temperature In Central Park", 
+    labs(title = "Daily Average Temperature In Central Park (AM vs PM)", 
          x = "Date", 
          y = "Average Temperature (°F)",
          fill = "Time of Day"
