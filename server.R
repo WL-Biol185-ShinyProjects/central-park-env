@@ -37,7 +37,7 @@ function(input, output) {
       theme_void() +                                         # removes axes/gridlines
       theme(
         plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
-        legend.title = element_text(face = "bold")
+    legend.title = element_text(face = "bold")
       )
   })
   
