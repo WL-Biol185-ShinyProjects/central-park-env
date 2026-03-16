@@ -100,21 +100,21 @@ function(input, output) {
       filter(made_noise == TRUE) %>%
       count(noise) %>%
       mutate(pct = n / sum(n),                               # calculate proportion
-      label = scales::percent(pct, accuracy = 1)) %>% # e.g. "45%"
+             label = scales::percent(pct, accuracy = 1)) %>% # e.g. "45%"
       ggplot(aes(x = "", y = pct, fill = noise)) +
       geom_bar(stat = "identity", width = 1) +
       coord_polar(theta = "y") +                             # this turns bar into pie
       geom_text(aes(label = label),
-              position = position_stack(vjust = 0.5),      # centers labels in slices
-              color = "white", fontface = "bold", size = 5) +
-    labs(title = "Pie Chart - Squirrel Noises", fill = "Noises") +
-    theme_void() +                                         # removes axes/gridlines
-    theme(
-      plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
-      legend.title = element_text(face = "bold")
-    )
-})
-  
+                position = position_stack(vjust = 0.5),      # centers labels in slices
+                color = "white", fontface = "bold", size = 5) +
+      labs(title = "Pie Chart - Squirrel Noises", fill = "Noises") +
+      theme_void() +                                         # removes axes/gridlines
+      theme(
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+        legend.title = element_text(face = "bold")
+      )
+  })
+
   output$squirrel_plot7 <- renderPlot({
     central_park_act_obs %>%
       filter(did_activity == TRUE) %>%
