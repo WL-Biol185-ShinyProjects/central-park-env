@@ -8,7 +8,6 @@ source("dashboard.R")
 source("meet_the_squirrels.R")
 source("where_are_they.R")
 source("what_are_they_doing.R")
-source("what_are_they_doing_intro.R")
 source("park_conditions.R")
 
   dashboardPage(skin = "green",
@@ -19,7 +18,6 @@ source("park_conditions.R")
       dashboard,
       meet_the_squirrels,
       where_are_they,
-      what_are_they_doing_intro,
       attitude,
       activity,
       tail_behavior,
