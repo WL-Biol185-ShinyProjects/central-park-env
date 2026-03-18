@@ -8,6 +8,7 @@ source("meet_the_squirrels.R")
 source("where_are_they.R")
 source("what_are_they_doing.R")
 source("park_conditions.R")
+source("about_us.R")
 
   dashboardPage(skin = "green",
               dashboardHeader(title = "Squirrel Exploration"),
@@ -20,7 +21,8 @@ source("park_conditions.R")
       activity,
       tail_behavior,
       noise,
-      park_conditions
+      park_conditions,
+      about_us
             )
   ),
   )
