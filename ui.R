@@ -11,7 +11,6 @@ source("park_conditions.R")
 source("about_us.R")
 
   dashboardPage(skin = "green",
-              dashboardHeader(title = "Squirrel Exploration"),
               dashboardSidebar(sidebar),
               dashboardBody(
     tabItems(
