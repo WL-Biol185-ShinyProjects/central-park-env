@@ -207,6 +207,21 @@ function(input, output) {
             ) 
   })
   
+  output$color_plot1 <- renderPlot({
+  central_park_numeric_temp %>%
+    group_by(proper_date_format, Primary_Fur_Color) %>%
+    summarise(count = n(), .groups = "drop") %>%
+    mutate(proper_date_format = factor(format(proper_date_format, "%b %d"))) %>%
+    ggplot(aes(x = proper_date_format, y = count, fill = Primary_Fur_Color)) +
+    geom_bar(stat = "identity", position = "stack") +
+    labs(title = "Squirrel Fur Color Count by Day",
+         x = "Date", y = "Number of Squirrels",
+         fill = "Fur Color") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)
+          )
+  })
+  
   output$squirrel_map <- renderLeaflet({
   
   if (input$map_choice == "By Fur Color") {
