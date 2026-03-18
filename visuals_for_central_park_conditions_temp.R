@@ -1,7 +1,7 @@
 library(tidyverse)
 library(ggplot2)
 
-
+#conditions plot 1
   central_park_numeric_temp %>%
   group_by(proper_date_format, Shift) %>%
     summarise(avg_temp = mean(numeric_temp, na.rm = TRUE)) %>%
@@ -19,11 +19,11 @@ library(ggplot2)
   )   +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) # angled so they don't overlap
   
-  
+#in the works
   central_park_numeric_temp %>%
     ggplot(aes(Hectare_Conditions, Number_of_Squirrels)) + geom_bar(stat= "identity")
   
-  
+#squirrel color per day 
   central_park_numeric_temp %>%
     group_by(proper_date_format, Primary_Fur_Color) %>%
     summarise(squirrel_count = n()) %>%
@@ -33,15 +33,18 @@ library(ggplot2)
          x = "Date",
          y = "Number of Squirrels",
          fill = "Fur Color") +
-    scale_fill_manual(
-      values = c(
+    scale_fill_manual(values = c(
         "Black"    = "black",
         "Gray"     = "gray60",
-        "Cinnamon" = "#8B4513",
+        "Cinnamon" = "#B87333",
         "NA"       = "#4A7C59"  
-                ),
-      na.value = "#4A7C59"       # catches actual NA values
+                                ),
+          na.value = "#4A7C59"       # catches actual NA values
     ) +
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  
+  
+  
  
