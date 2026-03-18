@@ -1,6 +1,41 @@
 library(shiny)
 library(ggplot2)
 library(tidyverse)
+library(leaflet)
+library(leaflet.extras)
+
+central_park <- read_csv("central_park_og.csv")
+
+# DATA PREP FOR MAP GENERATION
+
+# age map
+age_table <- central_park %>% select(X, Y, Age)
+age_table[age_table == "?"] <- NA
+age <- age_table %>% drop_na()
+
+pal_age <- colorFactor(
+  palette = c("#FFD700", "#FF4500"),
+  levels = c("Adult", "Juvenile")
+)
+
+# fur map
+fur_table <- central_park %>% select(X, Y, "Primary Fur Color")
+fur <- fur_table %>% drop_na()
+fur <- fur %>% rename(fur_color = `Primary Fur Color`)
+
+pal_fur <- colorFactor(
+  palette = c("#696969", "#FF6B00", "#000000"),
+  levels = c("Gray", "Cinnamon", "Black")
+)
+
+# litter map
+litter_table <- central_park %>% select(X, Y, Litter)
+litter <- litter_table %>% drop_na()
+
+pal_litter <- colorFactor(
+  palette = c("#00CC00", "#FFD700", "#FF0000"),
+  levels = c("None", "Some", "Abundant")
+)
 
 function(input, output) {
   
@@ -171,4 +206,82 @@ function(input, output) {
       theme(axis.text.x = element_text(angle = 45, hjust = 1)           # angled so they don't overlap
             ) 
   })
+  
+  output$squirrel_map <- renderLeaflet({
+  
+  if (input$map_choice == "By Fur Color") {
+    leaflet(data = fur) %>%
+      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
+      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+      addCircleMarkers(
+        lng = ~X, lat = ~Y, radius = 3,
+        color = ~pal_fur(fur_color),
+        fillOpacity = 0.7, stroke = FALSE
+      ) %>%
+      addLegend(position = "bottomright", pal = pal_fur,
+                values = ~fur_color, title = "Squirrel Fur Color")
+    
+  } else if (input$map_choice == "By Litter Amount") {
+    leaflet(data = litter) %>%
+      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
+      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+      addCircleMarkers(
+        lng = ~X, lat = ~Y, radius = 3,
+        color = ~pal_litter(Litter),
+        fillOpacity = 0.7, stroke = FALSE
+      ) %>%
+      addLegend(position = "bottomright", pal = pal_litter,
+                values = ~Litter, title = "Litter Amount")
+    
+  } else if (input$map_choice == "By Age") {
+    leaflet(data = age) %>%
+      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
+      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+      addCircleMarkers(
+        lng = ~X, lat = ~Y, radius = 3,
+        color = ~pal_age(Age),
+        fillOpacity = 0.7, stroke = FALSE
+      ) %>%
+      addLegend(position = "bottomright", pal = pal_age,
+                values = ~Age, title = "Squirrel Age")
+    
+  } else if (input$map_choice == "Density") {
+    leaflet(data = central_park)%>% 
+      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>% 
+      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+      addCircleMarkers(
+        lng = ~X,
+        lat = ~Y,
+        radius = 2.5,
+        color = "#8B4513",
+        fillOpacity = 0.7,
+        stroke = FALSE
+      )
+    
+  } else if (input$map_choice == "Heat Map") {
+    leaflet(data = central_park) %>%
+      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
+      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%  
+      addHeatmap(
+        lng = ~X,
+        lat = ~Y,
+        blur = 25,      # how smooth/spread out the heat is
+        max = 0.05,     # intensity ceiling
+        radius = 17    # size of each point's influence
+      ) %>%
+      addControl(
+        html = '
+      <div style="background:white; padding:8px; border-radius:5px;">
+        <b>Squirrel Density</b><br>
+        <span style="color:#0000FF;">&#9632;</span> Low<br>
+        <span style="color:#00FF00;">&#9632;</span> Medium<br>
+        <span style="color:#FF0000;">&#9632;</span> High
+      </div>',
+        position = "bottomright"
+      )
+  }
+    
+})
+  
 }
+
