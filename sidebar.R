@@ -1,6 +1,6 @@
 library(shiny)
 
-sidebar <- dashboardSidebar(title = "Squirrels in Central Park",
+sidebar <- dashboardSidebar(title = "",
                 sidebarMenu(
                       menuItem("Meet the Squirrels", tabName = "meet_the_squirrels", icon = icon("tree")),
                       menuItem("Where Are They", tabName = "where_are_they", icon = icon("map")),
