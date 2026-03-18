@@ -13,7 +13,7 @@ where_are_they <- tabItem(tabName = "where_are_they",
                           fluidRow(
                             box(
                               width = 12,
-                              height = "650px",
+                              height = "800px",
                               leafletOutput("squirrel_map", height = "580px")
                             )
                           )
