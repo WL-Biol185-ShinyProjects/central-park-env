@@ -4,7 +4,6 @@ library(shiny)
 
 
 source("sidebar.R")
-source("dashboard.R")
 source("meet_the_squirrels.R")
 source("where_are_they.R")
 source("what_are_they_doing.R")
@@ -15,7 +14,6 @@ source("park_conditions.R")
               dashboardSidebar(sidebar),
               dashboardBody(
     tabItems(
-      dashboard,
       meet_the_squirrels,
       where_are_they,
       attitude,
