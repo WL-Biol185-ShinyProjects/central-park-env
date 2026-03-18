@@ -10,7 +10,8 @@ sidebar <- dashboardSidebar(title = "Squirrels in Central Park",
                           menuSubItem("Tail Behavior", tabName = "Tail_Behavior"),
                           menuSubItem("Noise", tabName = "Noise")
                           ),
-                      menuItem("Park Conditions", tabName = "park_conditions", icon = icon("cloud"))
+                      menuItem("Park Conditions", tabName = "park_conditions", icon = icon("cloud")),
+                      menuItem("About Us", tabName = "about_us", icon = icon("info-circle"))
                           )
 )
 
