@@ -1,16 +1,20 @@
 library (shiny)
 
 where_are_they <- tabItem(tabName = "where_are_they",
-                          fluidPage(
-                            sidebarLayout(
-                              sidebarPanel(
-                                selectInput("map_choice",
-                                            label = "Squirrels in Central Park",
-                                            choices = c("Density", "Heat Map", "By Fur Color", "By Litter Amount", "By Age"))
-                              ),
-                              mainPanel(
-                                leafletOutput("squirrel_map")
-                              )
+                          fluidRow(
+                            box(
+                              width = 12,
+                              title = "Squirrels in Central Park",
+                              selectInput("map_choice",
+                                          label = "Select Map",
+                                          choices = c("Density", "Heat Map", "By Fur Color", "By Litter Amount", "By Age"))
+                            )
+                          ),
+                          fluidRow(
+                            box(
+                              width = 12,
+                              height = "650px",
+                              leafletOutput("squirrel_map", height = "580px")
                             )
                           )
 )
