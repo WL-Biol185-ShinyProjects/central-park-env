@@ -198,7 +198,7 @@ function(input, output) {
            y = "Average Temperature (°F)",
            fill = "Time of Day"
       ) +
-      scale_fill_manual(values = c("AM" = "#5BA08A", "PM" = "#E09B6A")) +  # custom colors
+      scale_fill_manual(values = c("AM" = "#5BA08A", "PM" = "#8B4513")) +  # custom colors
       scale_x_date(
         breaks = unique(central_park_numeric_temp$proper_date_format),  # one break per date
         date_labels = "%b %d"                                           # formats as "Month Day"
