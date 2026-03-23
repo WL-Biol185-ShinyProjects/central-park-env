@@ -161,7 +161,20 @@ leaflet(data = litter) %>%
     title = "Litter Amount"
   )
 
+# HUMAN MAP
 
+# creating a new temp table where we look at NUMBER OF SIGHTERS
 
+humans_table <- central_park %>% select(X, Y, "Number of sighters") %>% rename(num_sighters = `Number of sighters`)
 
-
+leaflet(data = humans_table)%>% 
+  setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>% 
+  addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+  addCircleMarkers(
+    lng = ~X,
+    lat = ~Y,
+    radius = ~num_sighters * 3,
+    color = "#8B4513",
+    fillOpacity = 0.7,
+    stroke = FALSE
+  )
