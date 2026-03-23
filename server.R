@@ -4,11 +4,14 @@ library(tidyverse)
 library(leaflet)
 library(leaflet.extras)
 
+central_park <- read_csv("central_park_og.csv")
+
 source("park_conditions_data_organization_file.R")
 source("Compiled_Observation_Tables.R")
 source("map_generation.R")
 
 central_park <- read_csv("central_park_og.csv")
+
 
 # DATA PREP FOR MAP GENERATION
 
