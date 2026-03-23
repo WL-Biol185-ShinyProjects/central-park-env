@@ -1,7 +1,6 @@
 library(leaflet)
 library(leaflet.extras)
 central_park <- read_csv("central_park_og.csv")
-View(central_park)
 
 # DENSITY MAP
 leaflet(data = central_park)%>% 
