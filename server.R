@@ -4,6 +4,8 @@ library(tidyverse)
 library(leaflet)
 library(leaflet.extras)
 
+source("squirrel_theme.R")
+
 central_park <- read_csv("central_park_og.csv")
 
 # DATA PREP FOR MAP GENERATION
