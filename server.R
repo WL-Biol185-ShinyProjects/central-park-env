@@ -5,9 +5,8 @@ library(leaflet)
 library(leaflet.extras)
 
 central_park <- read_csv("central_park_og.csv")
-
-source("park_conditions_data_organization_file.R")
 source("Compiled_Observation_Tables.R")
+source("park_conditions_data_organization_file.R")
 source("map_generation.R")
 
 # DATA PREP FOR MAP GENERATION
