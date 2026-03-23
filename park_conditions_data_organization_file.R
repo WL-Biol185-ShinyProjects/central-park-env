@@ -83,7 +83,7 @@ central_park_numeric_temp$numeric_temp <- sapply(central_park_numeric_temp$Sight
 #Renaming table variable names
 
 #I want to get rid of all the spaces in between our variable names
-
+central_park <- read.csv("central_park.csv")
 colnames(central_park)<-gsub(" ","_",
                              colnames(central_park),
                              fixed=TRUE)
