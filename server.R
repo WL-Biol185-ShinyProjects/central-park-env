@@ -10,7 +10,6 @@ source("park_conditions_data_organization_file.R")
 source("Compiled_Observation_Tables.R")
 source("map_generation.R")
 
-
 # DATA PREP FOR MAP GENERATION
 
 # age map
