@@ -4,8 +4,6 @@ library(tidyverse)
 library(leaflet)
 library(leaflet.extras)
 
-source("squirrel_theme.R")
-
 central_park <- read_csv("central_park_og.csv")
 
 # DATA PREP FOR MAP GENERATION
@@ -77,7 +75,7 @@ function(input, output) {
       theme_void() +                                         # removes axes/gridlines
       theme(
         plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
-    legend.title = element_text(face = "bold")
+        legend.title = element_text(face = "bold")
       )
   })
   
@@ -154,7 +152,7 @@ function(input, output) {
         legend.title = element_text(face = "bold")
       )
   })
-
+  
   output$squirrel_plot7 <- renderPlot({
     central_park_act_obs %>%
       filter(did_activity == TRUE) %>%
@@ -191,7 +189,7 @@ function(input, output) {
         legend.title = element_text(face = "bold")
       )
   })  
-
+  
   output$conditions_plot1 <- renderPlot({
     central_park_numeric_temp %>%
       group_by(proper_date_format, Shift) %>%
@@ -209,112 +207,111 @@ function(input, output) {
         date_labels = "%b %d"                                           # formats as "Month Day"
       )   +
       theme(axis.text.x = element_text(angle = 45, hjust = 1)           # angled so they don't overlap
-            ) 
+      ) 
   })
   
   output$color_plot1 <- renderPlot({
-  central_park_numeric_temp %>%
-    group_by(proper_date_format, Primary_Fur_Color) %>%
-    summarise(count = n(), .groups = "drop") %>%
-    mutate(proper_date_format = factor(format(proper_date_format, "%b %d"))) %>%
-    ggplot(aes(x = proper_date_format, y = count, fill = Primary_Fur_Color)) +
-    geom_bar(stat = "identity", position = "stack") +
-    labs(title = "Squirrel Fur Color Count by Day",
-         x = "Date", y = "Number of Squirrels",
-         fill = "Fur Color") +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1)
-          )
+    central_park_numeric_temp %>%
+      group_by(proper_date_format, Primary_Fur_Color) %>%
+      summarise(count = n(), .groups = "drop") %>%
+      mutate(proper_date_format = factor(format(proper_date_format, "%b %d"))) %>%
+      ggplot(aes(x = proper_date_format, y = count, fill = Primary_Fur_Color)) +
+      geom_bar(stat = "identity", position = "stack") +
+      labs(title = "Squirrel Fur Color Count by Day",
+           x = "Date", y = "Number of Squirrels",
+           fill = "Fur Color") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)
+      )
   })
   
   output$squirrel_map <- renderLeaflet({
-  
-  if (input$map_choice == "By Fur Color") {
-    leaflet(data = fur) %>%
-      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
-      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
-      addCircleMarkers(
-        lng = ~X, lat = ~Y, radius = 3,
-        color = ~pal_fur(fur_color),
-        fillOpacity = 0.7, stroke = FALSE
-      ) %>%
-      addLegend(position = "bottomright", pal = pal_fur,
-                values = ~fur_color, title = "Squirrel Fur Color")
     
-  } else if (input$map_choice == "By Litter Amount") {
-    leaflet(data = litter) %>%
-      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
-      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
-      addCircleMarkers(
-        lng = ~X, lat = ~Y, radius = 3,
-        color = ~pal_litter(Litter),
-        fillOpacity = 0.7, stroke = FALSE
-      ) %>%
-      addLegend(position = "bottomright", pal = pal_litter,
-                values = ~Litter, title = "Litter Amount")
-    
-  } else if (input$map_choice == "By Age") {
-    leaflet(data = age) %>%
-      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
-      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
-      addCircleMarkers(
-        lng = ~X, lat = ~Y, radius = 3,
-        color = ~pal_age(Age),
-        fillOpacity = 0.7, stroke = FALSE
-      ) %>%
-      addLegend(position = "bottomright", pal = pal_age,
-                values = ~Age, title = "Squirrel Age")
-    
-  } else if (input$map_choice == "Squirrel Density") {
-    leaflet(data = central_park)%>% 
-      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>% 
-      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
-      addCircleMarkers(
-        lng = ~X,
-        lat = ~Y,
-        radius = 2.5,
-        color = "#8B4513",
-        fillOpacity = 0.7,
-        stroke = FALSE
-      )
-    
-  } else if (input$map_choice == "Squirrel Heat Map") {
-    leaflet(data = central_park) %>%
-      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
-      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%  
-      addHeatmap(
-        lng = ~X,
-        lat = ~Y,
-        blur = 25,      # how smooth/spread out the heat is
-        max = 0.05,     # intensity ceiling
-        radius = 17    # size of each point's influence
-      ) %>%
-      addControl(
-        html = '
+    if (input$map_choice == "By Fur Color") {
+      leaflet(data = fur) %>%
+        setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+        addCircleMarkers(
+          lng = ~X, lat = ~Y, radius = 3,
+          color = ~pal_fur(fur_color),
+          fillOpacity = 0.7, stroke = FALSE
+        ) %>%
+        addLegend(position = "bottomright", pal = pal_fur,
+                  values = ~fur_color, title = "Squirrel Fur Color")
+      
+    } else if (input$map_choice == "By Litter Amount") {
+      leaflet(data = litter) %>%
+        setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+        addCircleMarkers(
+          lng = ~X, lat = ~Y, radius = 3,
+          color = ~pal_litter(Litter),
+          fillOpacity = 0.7, stroke = FALSE
+        ) %>%
+        addLegend(position = "bottomright", pal = pal_litter,
+                  values = ~Litter, title = "Litter Amount")
+      
+    } else if (input$map_choice == "By Age") {
+      leaflet(data = age) %>%
+        setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+        addCircleMarkers(
+          lng = ~X, lat = ~Y, radius = 3,
+          color = ~pal_age(Age),
+          fillOpacity = 0.7, stroke = FALSE
+        ) %>%
+        addLegend(position = "bottomright", pal = pal_age,
+                  values = ~Age, title = "Squirrel Age")
+      
+    } else if (input$map_choice == "Squirrel Density") {
+      leaflet(data = central_park)%>% 
+        setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>% 
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+        addCircleMarkers(
+          lng = ~X,
+          lat = ~Y,
+          radius = 2.5,
+          color = "#8B4513",
+          fillOpacity = 0.7,
+          stroke = FALSE
+        )
+      
+    } else if (input$map_choice == "Squirrel Heat Map") {
+      leaflet(data = central_park) %>%
+        setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%  
+        addHeatmap(
+          lng = ~X,
+          lat = ~Y,
+          blur = 25,      # how smooth/spread out the heat is
+          max = 0.05,     # intensity ceiling
+          radius = 17    # size of each point's influence
+        ) %>%
+        addControl(
+          html = '
       <div style="background:white; padding:8px; border-radius:5px;">
         <b>Squirrel Density</b><br>
         <span style="color:#0000FF;">&#9632;</span> Low<br>
         <span style="color:#00FF00;">&#9632;</span> Medium<br>
         <span style="color:#FF0000;">&#9632;</span> High
       </div>',
-        position = "bottomright"
-      )
-  } else if (input$map_choice == "Human Density") {
-    leaflet(data = humans_table)%>% 
-      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>% 
-      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
-      addCircleMarkers(
-        lng = ~X,
-        lat = ~Y,
-        radius = ~num_sighters * 3,
-        color = "#8B4513",
-        fillOpacity = 0.7,
-        stroke = FALSE
-      )
+          position = "bottomright"
+        )
+    } else if (input$map_choice == "Human Density") {
+      leaflet(data = humans_table)%>% 
+        setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>% 
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+        addCircleMarkers(
+          lng = ~X,
+          lat = ~Y,
+          radius = ~num_sighters * 3,
+          color = "#8B4513",
+          fillOpacity = 0.7,
+          stroke = FALSE
+        )
+      
+    }
     
-  }
-     
-})
+  })
   
 }
-
