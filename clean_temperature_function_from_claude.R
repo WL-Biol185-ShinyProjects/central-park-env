@@ -88,6 +88,6 @@ cat("Original NAs:", sum(is.na(central_park_numeric_temp$Sighter.Observed.Weathe
 cat("After conversion:", sum(is.na(central_park_numeric_temp$numeric_temp)), "\n")
 
 # Save the cleaned dataset
-write.csv(data, "central_park_numeric_temp.csv", row.names = FALSE)
+# write.csv(data, "central_park_numeric_temp.csv", row.names = FALSE)
 cat("\n✓ Cleaned data saved to: central_park_numeric_temp.csv\n")
 
