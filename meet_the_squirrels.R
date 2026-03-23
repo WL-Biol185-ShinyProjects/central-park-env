@@ -27,6 +27,11 @@ meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                     ),
                     
                     box(
+                      plotOutput(squirrelsincentralpark), title = "Squirrels in Central Park", width = 6
+                    ),
+                    
+    
+                    box(
                       p("On this site you will find a variety of data concerning eastern grey squirrels from observations of their behavior, where they are and what the weather was like at the time of their sighting. This site then takes that data a step further bringing different elements together to tell a full story for squirrels in central park."), title = "What to Expect", width = 6
                     ),
                   )
