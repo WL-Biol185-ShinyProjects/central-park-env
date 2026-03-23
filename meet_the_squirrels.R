@@ -24,11 +24,7 @@ meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                   fluidRow(
                     box(
                       p("It is expected that over 2000 Eastern grey squirrels call central park home. Since their introduction to the park in the 1870’s they have become  treasured icons among the park's residents. These city squirrels are primarily grey with some variations being black and cinnamon which will be reflected in the data. While park visitors are now discouraged from feeding the squirrels they remain fairly comfortable around them allowing for excellent observation with in the park."), title = "Central Park Squirrels", width = 6
-                    ),
-                    
-                    box(
-                      plotOutput(squirrelsincentralpark), title = "Squirrels in Central Park", width = 6
-                    ),
+                    ), 
                     
     
                     box(
