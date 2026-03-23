@@ -14,6 +14,10 @@ colnames(central_park_act_obs)<-gsub(" ","_",
                                           colnames(central_park_act_obs),
                                           fixed=TRUE)
 
+colnames(central_park_attitude)<-gsub(" ","_",
+                                     colnames(central_park_attitude),
+                                     fixed=TRUE)
+
 colnames(central_park_noise_obs)<-gsub(" ","_",
                                      colnames(central_park_noise_obs),
                                      fixed=TRUE)
