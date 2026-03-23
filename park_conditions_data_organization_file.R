@@ -84,9 +84,6 @@ central_park_numeric_temp$numeric_temp <- sapply(central_park_numeric_temp$Sight
 
 #I want to get rid of all the spaces in between our variable names
 
-colnames(central_park)<-gsub(" ","_",
-                             colnames(central_park),
-                             fixed=TRUE)
 
 colnames(central_park_numeric_temp)<-gsub(".","_",
                                           colnames(central_park_numeric_temp),
