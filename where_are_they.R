@@ -7,7 +7,7 @@ where_are_they <- tabItem(tabName = "where_are_they",
                               title = "Squirrels in Central Park",
                               selectInput("map_choice",
                                           label = "Select Map",
-                                          choices = c("Density", "Heat Map", "By Fur Color", "By Litter Amount", "By Age"))
+                                          choices = c("Squirrel Density", "Squirrel Heat Map", "Human Density", "By Fur Color", "By Litter Amount", "By Age"))
                             )
                           ),
                           fluidRow(

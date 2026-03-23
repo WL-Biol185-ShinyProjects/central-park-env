@@ -39,6 +39,9 @@ pal_litter <- colorFactor(
   levels = c("None", "Some", "Abundant")
 )
 
+# human map
+humans_table <- central_park %>% select(X, Y, "Number of sighters") %>% rename(num_sighters = `Number of sighters`)
+
 function(input, output) {
   
   output$squirrel_plot1 <- renderPlot({
@@ -262,7 +265,7 @@ function(input, output) {
       addLegend(position = "bottomright", pal = pal_age,
                 values = ~Age, title = "Squirrel Age")
     
-  } else if (input$map_choice == "Density") {
+  } else if (input$map_choice == "Squirrel Density") {
     leaflet(data = central_park)%>% 
       setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>% 
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
@@ -275,7 +278,7 @@ function(input, output) {
         stroke = FALSE
       )
     
-  } else if (input$map_choice == "Heat Map") {
+  } else if (input$map_choice == "Squirrel Heat Map") {
     leaflet(data = central_park) %>%
       setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>%
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>%  
@@ -296,6 +299,19 @@ function(input, output) {
       </div>',
         position = "bottomright"
       )
+  } else if (input$map_choice == "Human Density") {
+    leaflet(data = humans_table)%>% 
+      setView(lng = -73.9683, lat = 40.7851, zoom = 14) %>% 
+      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+      addCircleMarkers(
+        lng = ~X,
+        lat = ~Y,
+        radius = ~num_sighters * 3,
+        color = "#8B4513",
+        fillOpacity = 0.7,
+        stroke = FALSE
+      )
+    
   }
      
 })
