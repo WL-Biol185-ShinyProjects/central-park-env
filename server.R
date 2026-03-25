@@ -353,7 +353,7 @@ function(input, output) {
   output$squirrel_color_plot1 <- renderPlot({
     print(input$select_date=="All")
   central_park_numeric_temp %>%
-    if (input$select_date=="All") {
+    if (input$select_date == "All") {
       group_by(Primary_Fur_Color) %>%
         summarise(squirrel_count = n()) %>%
         ggplot(aes(Primary_Fur_Color, squirrel_count, fill=Primary_Fur_Color)) +
