@@ -213,6 +213,38 @@ function(input, output) {
       ) 
   })
   
+
+  output$temp_activity_plot <- renderPlot({
+    activity_temp <- central_park_numeric_temp %>%
+      select(numeric_temp, Running, Chasing, Climbing, Eating, Foraging) %>%
+      pivot_longer(
+        cols = c(Running, Chasing, Climbing, Eating, Foraging),
+        names_to = "activity",
+        values_to = "did_activity"
+      ) %>%
+      filter(did_activity == TRUE, !is.na(numeric_temp))
+    
+    ggplot(activity_temp, aes(x = numeric_temp, fill = activity)) +
+      geom_histogram(binwidth = 5, position = "dodge") +
+      scale_fill_manual(values = c(
+        "#A0522D", "#CD853F", "#DEB887", "#8B4513", "#D2691E"
+      )) +
+      labs(
+        title = "Squirrel Activity by Temperature",
+        subtitle = "Activities observed across temperature ranges in Central Park",
+        x = "Temperature (°F)",
+        y = "Number of Squirrels",
+        fill = "Activity"
+      ) +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+        plot.subtitle = element_text(hjust = 0.5, color = "grey50"),
+        axis.title = element_text(face = "bold"),
+        legend.position = "bottom"
+      )
+  })
+  
   output$color_plot1 <- renderPlot({
     central_park_numeric_temp %>%
       group_by(proper_date_format, Primary_Fur_Color) %>%
@@ -317,4 +349,46 @@ function(input, output) {
     
   })
   
+
+  output$squirrel_color_plot1 <- renderPlot({
+    print(input$select_date=="All")
+  central_park_numeric_temp %>%
+    if (input$select_date == "All") {
+      group_by(Primary_Fur_Color) %>%
+        summarise(squirrel_count = n()) %>%
+        ggplot(aes(Primary_Fur_Color, squirrel_count, fill=Primary_Fur_Color)) +
+        geom_bar(stat = "identity", width=.5) +
+        labs(title = "Squirrel Fur Color Count",
+             x = "Fur Color",
+             y = "Number of Squirrels",) +
+        scale_fill_manual(values = c(
+          "Black"    = "black",
+          "Gray"     = "gray60",
+          "Cinnamon" = "#B87333",
+          "NA"       = "#4A7C59"),
+          na.value   = "#4A7C59"       # catches actual NA values
+        ) +
+        theme_minimal() +
+        theme(axis.text.x = element_text(angle = 0, hjust = 1), legend.position = "none")  
+    } else {
+      filter(proper_date_format == input$select_date) %>%      # filter by selected date
+        group_by(Primary_Fur_Color) %>%
+        summarise(squirrel_count = n(), .groups = "drop") %>%
+        ggplot(aes(Primary_Fur_Color, squirrel_count, fill = Primary_Fur_Color)) +
+        geom_bar(stat = "identity", width = .5) +
+        labs(title = paste("Squirrel Fur Color Count", input$select_date),
+             x = "Fur Color",
+             y = "Number of Squirrels") +
+        scale_fill_manual(values = c(
+          "Black"    = "black",
+          "Gray"     = "gray60",
+          "Cinnamon" = "#B87333",
+          "NA"       = "#4A7C59"),
+          na.value   = "#4A7C59") +
+        theme_minimal() +
+        theme(axis.text.x = element_text(angle = 0, hjust = 1), legend.position = "none")
+    }
+  })
+  
 }
+
