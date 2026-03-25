@@ -352,8 +352,8 @@ function(input, output) {
 
   output$squirrel_color_plot1 <- renderPlot({
     print(input$select_date=="All")
-  central_park_numeric_temp %>%
     if (input$select_date == "All") {
+      central_park_numeric_temp %>%
       group_by(Primary_Fur_Color) %>%
         summarise(squirrel_count = n()) %>%
         ggplot(aes(Primary_Fur_Color, squirrel_count, fill=Primary_Fur_Color)) +
@@ -371,11 +371,13 @@ function(input, output) {
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 0, hjust = 1), legend.position = "none")  
     } else {
+      central_park_numeric_temp %>%
       filter(proper_date_format == input$select_date) %>%      # filter by selected date
         group_by(Primary_Fur_Color) %>%
         summarise(squirrel_count = n(), .groups = "drop") %>%
         ggplot(aes(Primary_Fur_Color, squirrel_count, fill = Primary_Fur_Color)) +
         geom_bar(stat = "identity", width = .5) +
+        ylim(0,300) + 
         labs(title = paste("Squirrel Fur Color Count", input$select_date),
              x = "Fur Color",
              y = "Number of Squirrels") +
