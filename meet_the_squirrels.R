@@ -31,10 +31,23 @@ meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                     box(
                       p("On this site you will find a variety of data concerning eastern grey squirrels from observations of their behavior, where they are and what the weather was like at the time of their sighting. This site then takes that data a step further bringing different elements together to tell a full story for squirrels in central park."), title = "What to Expect", width = 6
                     ),
-                  )
+                  ),
                      
-                          
+                  fluidRow(
+                    box(
+                      selectInput("select_date", "Select Date:",
+                                  choices  = c("All", as.chaacter(sort(unique(central_park_numeric_temp$proper_date_format)))),
+                                  selected = "All",
+                                  width=4
+                      ),
+                      plotOutput("squirrel_color_plot1"), width = 8)
                           )
+                              )
+                      
+                    
+                   
+                          
+
 
 
 
