@@ -14,6 +14,11 @@ where_are_they <- tabItem(tabName = "where_are_they",
                             box(
                               width = 12,
                               height = "800px",
+                              tags$head(tags$style(HTML("
+      .box-body {
+        padding-top: 40px !important;
+      }
+    "))),
                               leafletOutput("squirrel_map", height = "580px")
                             )
                           )
