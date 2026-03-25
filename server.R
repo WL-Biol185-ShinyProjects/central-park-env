@@ -213,20 +213,6 @@ function(input, output) {
       ) 
   })
   
-  output$color_plot1 <- renderPlot({
-    central_park_numeric_temp %>%
-      group_by(proper_date_format, Primary_Fur_Color) %>%
-      summarise(count = n(), .groups = "drop") %>%
-      mutate(proper_date_format = factor(format(proper_date_format, "%b %d"))) %>%
-      ggplot(aes(x = proper_date_format, y = count, fill = Primary_Fur_Color)) +
-      geom_bar(stat = "identity", position = "stack") +
-      labs(title = "Squirrel Fur Color Count by Day",
-           x = "Date", y = "Number of Squirrels",
-           fill = "Fur Color") +
-      theme_minimal() +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1)
-      )
-  })
   
   output$squirrel_map <- renderLeaflet({
     
@@ -318,8 +304,9 @@ function(input, output) {
   })
   
   output$squirrel_color_plot1 <- renderPlot({
+    print(input$select_date=="All")
   central_park_numeric_temp %>%
-    if(input$select_date=="All") {
+    if (input$select_date=="All") {
       group_by(Primary_Fur_Color) %>%
         summarise(squirrel_count = n()) %>%
         ggplot(aes(Primary_Fur_Color, squirrel_count, fill=Primary_Fur_Color)) +
@@ -332,7 +319,7 @@ function(input, output) {
           "Gray"     = "gray60",
           "Cinnamon" = "#B87333",
           "NA"       = "#4A7C59"),
-          na.value = "#4A7C59"       # catches actual NA values
+          na.value   = "#4A7C59"       # catches actual NA values
         ) +
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 0, hjust = 1), legend.position = "none")  
@@ -354,8 +341,7 @@ function(input, output) {
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 0, hjust = 1), legend.position = "none")
     }
-  }
-  )
+  })
   
 }
 

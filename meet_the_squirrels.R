@@ -33,14 +33,19 @@ meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                     ),
                   ),
                      
+                  
+                    
                   fluidRow(
                     box(
+                      width = 4,
                       selectInput("select_date", "Select Date:",
-                                  choices  = c("All", as.chaacter(sort(unique(central_park_numeric_temp$proper_date_format)))),
+                                  choices  = c("All", as.character(unique(central_park_numeric_temp$proper_date_format)), recursive=TRUE),
                                   selected = "All",
-                                  width=4
-                      ),
-                      plotOutput("squirrel_color_plot1"), width = 8)
+                                 
+                      )),
+                    box(
+                      width = 8,
+                       plotOutput("squirrel_color_plot1"))
                           )
                               )
                       
