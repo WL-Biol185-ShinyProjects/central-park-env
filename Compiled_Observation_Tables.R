@@ -45,3 +45,10 @@ central_park_attitude <- central_park_og %>%
   ) %>%
   select("Unique Squirrel ID", "attitude", "did_attitude")
 
+central_park_act_obs_age <- central_park_og %>%
+  pivot_longer(
+    cols = c(Running, Chasing, Climbing, Eating, Foraging),
+    names_to = "activity",
+    values_to = "did_activity"
+  ) %>%
+  select("Unique_Squirrel_ID", "activity", "did_activity", "Age")
