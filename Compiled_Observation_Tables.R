@@ -51,4 +51,5 @@ central_park_act_obs_age <- central_park_og %>%
     names_to = "activity",
     values_to = "did_activity"
   ) %>%
-  select("Unique_Squirrel_ID", "activity", "did_activity", "Age")
+  select("Unique Squirrel ID", "activity", "did_activity", "Age")
+
