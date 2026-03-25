@@ -213,6 +213,54 @@ function(input, output) {
       ) 
   })
   
+<<<<<<< HEAD
+=======
+  output$temp_activity_plot <- renderPlot({
+    activity_temp <- central_park_numeric_temp %>%
+      select(numeric_temp, Running, Chasing, Climbing, Eating, Foraging) %>%
+      pivot_longer(
+        cols = c(Running, Chasing, Climbing, Eating, Foraging),
+        names_to = "activity",
+        values_to = "did_activity"
+      ) %>%
+      filter(did_activity == TRUE, !is.na(numeric_temp))
+    
+    ggplot(activity_temp, aes(x = numeric_temp, fill = activity)) +
+      geom_histogram(binwidth = 5, position = "dodge") +
+      scale_fill_manual(values = c(
+        "#A0522D", "#CD853F", "#DEB887", "#8B4513", "#D2691E"
+      )) +
+      labs(
+        title = "Squirrel Activity by Temperature",
+        subtitle = "Activities observed across temperature ranges in Central Park",
+        x = "Temperature (°F)",
+        y = "Number of Squirrels",
+        fill = "Activity"
+      ) +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+        plot.subtitle = element_text(hjust = 0.5, color = "grey50"),
+        axis.title = element_text(face = "bold"),
+        legend.position = "bottom"
+      )
+  })
+  
+  output$color_plot1 <- renderPlot({
+    central_park_numeric_temp %>%
+      group_by(proper_date_format, Primary_Fur_Color) %>%
+      summarise(count = n(), .groups = "drop") %>%
+      mutate(proper_date_format = factor(format(proper_date_format, "%b %d"))) %>%
+      ggplot(aes(x = proper_date_format, y = count, fill = Primary_Fur_Color)) +
+      geom_bar(stat = "identity", position = "stack") +
+      labs(title = "Squirrel Fur Color Count by Day",
+           x = "Date", y = "Number of Squirrels",
+           fill = "Fur Color") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)
+      )
+  })
+>>>>>>> 6c80f4bc893997fe6b4567cd0e5cd0276777338f
   
   output$squirrel_map <- renderLeaflet({
     
@@ -303,6 +351,7 @@ function(input, output) {
     
   })
   
+
   output$squirrel_color_plot1 <- renderPlot({
     print(input$select_date=="All")
   central_park_numeric_temp %>%
@@ -344,5 +393,4 @@ function(input, output) {
   })
   
 }
-
 
