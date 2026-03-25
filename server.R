@@ -213,6 +213,37 @@ function(input, output) {
       ) 
   })
   
+  output$temp_activity_plot <- renderPlot({
+    activity_temp <- central_park_numeric_temp %>%
+      select(numeric_temp, Running, Chasing, Climbing, Eating, Foraging) %>%
+      pivot_longer(
+        cols = c(Running, Chasing, Climbing, Eating, Foraging),
+        names_to = "activity",
+        values_to = "did_activity"
+      ) %>%
+      filter(did_activity == TRUE, !is.na(numeric_temp))
+    
+    ggplot(activity_temp, aes(x = numeric_temp, fill = activity)) +
+      geom_histogram(binwidth = 5, position = "dodge") +
+      scale_fill_manual(values = c(
+        "#A0522D", "#CD853F", "#DEB887", "#8B4513", "#D2691E"
+      )) +
+      labs(
+        title = "Squirrel Activity by Temperature",
+        subtitle = "Activities observed across temperature ranges in Central Park",
+        x = "Temperature (°F)",
+        y = "Number of Squirrels",
+        fill = "Activity"
+      ) +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+        plot.subtitle = element_text(hjust = 0.5, color = "grey50"),
+        axis.title = element_text(face = "bold"),
+        legend.position = "bottom"
+      )
+  })
+  
   output$color_plot1 <- renderPlot({
     central_park_numeric_temp %>%
       group_by(proper_date_format, Primary_Fur_Color) %>%
