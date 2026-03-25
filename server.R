@@ -213,8 +213,7 @@ function(input, output) {
       ) 
   })
   
-<<<<<<< HEAD
-=======
+
   output$temp_activity_plot <- renderPlot({
     activity_temp <- central_park_numeric_temp %>%
       select(numeric_temp, Running, Chasing, Climbing, Eating, Foraging) %>%
@@ -260,7 +259,6 @@ function(input, output) {
       theme(axis.text.x = element_text(angle = 45, hjust = 1)
       )
   })
->>>>>>> 6c80f4bc893997fe6b4567cd0e5cd0276777338f
   
   output$squirrel_map <- renderLeaflet({
     
