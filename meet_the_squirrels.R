@@ -1,4 +1,5 @@
 library(shiny)
+read_csv("central_park_numeric_temp.csv")
 
 meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                               #insert code here
@@ -39,7 +40,7 @@ meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                     box(
                       width = 4,
                       selectInput("select_date", "Select Date:",
-                                  choices  = c("All", as.character(unique(central_park_numeric_temp$proper_date_format)), recursive=TRUE),
+                                  choices  = c("All", as.character(sort(unique(central_park_numeric_temp$proper_date_format))), recursive=TRUE),
                                   selected = "All",
                                  
                       )),
