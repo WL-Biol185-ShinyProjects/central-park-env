@@ -14,6 +14,7 @@ meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                                 )
                         )
                        )
+                
                           ),
                   fluidRow(
                     box(
