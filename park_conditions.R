@@ -4,8 +4,14 @@ library(shiny)
 
 park_conditions <- tabItem(tabName = "park_conditions",
                            fluidRow(
-                             box(plotOutput("conditions_plot1"), width = 12),
-                           ),
+                             box(
+                               width = 4,
+                               plotOutput("conditions_plot2")
+                                ),
+                             box(
+                               width = 8,
+                               plotOutput("conditions_plot1")
+                           )),
                              fluidRow(
                                box(
                                  title = "Average Daily Tempertaure In Central Park",
