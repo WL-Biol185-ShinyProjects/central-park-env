@@ -107,7 +107,20 @@ activity <- tabItem(tabName = "Activity",
                           style = "border-radius: 8px;"
                         )
                       )
-                    )
+                    ),
+                  fluidRow(
+                    box(
+                      title = "Squirrels in Action", status = "warning", solidHeader = TRUE,
+                      width = 6,
+                      tags$iframe(
+                        width = "100%", height = "300",
+                        src = "https://www.youtube.com/embed/_9ZjgeSKkeQ?si=Y9kPAVL9Bg1uuLJ0",
+                        frameborder = "0", allowfullscreen = NA,
+                        style = "border-radius: 8px;"
+                      )
+                    ) 
+                  )
+
 )
 
 noise <- tabItem(tabName = "Noise",
