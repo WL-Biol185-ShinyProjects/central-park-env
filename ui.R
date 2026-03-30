@@ -9,6 +9,7 @@ source("what_are_they_doing.R")
 source("park_conditions.R")
 source("about_us.R")
 
+
 custom_css <- tags$style(HTML("
   .skin-green .main-sidebar { background-color: #A0522D !important; }
   .skin-green .main-sidebar .sidebar-menu > li > a { color: #FFF8DC !important; }
