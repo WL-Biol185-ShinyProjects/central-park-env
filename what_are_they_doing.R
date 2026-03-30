@@ -97,29 +97,29 @@ activity <- tabItem(tabName = "Activity",
                           "Because these observations were made in the fall, the activities observed
         align with typical squirrel activity for this time of year.")
                       ),
-                      tabBox(
-                        title = "Squirrel Activity by age",
+                      box(
+                        title = "Squirrels in Action", status = "warning", solidHeader = TRUE,
                         width = 6,
-                        tabPanel("Juvenile",
-                                 plotOutput("juvenileCloud")
-                        ),
-                        tabPanel("Adult",
-                                 plotOutput("adultCloud")
-                        
+                        tags$iframe(
+                          width = "100%", height = "300",
+                          src = "https://www.youtube.com/embed/_9ZjgeSKkeQ?si=Y9kPAVL9Bg1uuLJ0",
+                          frameborder = "0", allowfullscreen = NA,
+                          style = "border-radius: 8px;"
                         )
-                    )
+                      ) 
                     ),  
                   fluidRow(
-                    box(
-                      title = "Squirrels in Action", status = "warning", solidHeader = TRUE,
-                      width = 6,
-                      tags$iframe(
-                        width = "100%", height = "300",
-                        src = "https://www.youtube.com/embed/_9ZjgeSKkeQ?si=Y9kPAVL9Bg1uuLJ0",
-                        frameborder = "0", allowfullscreen = NA,
-                        style = "border-radius: 8px;"
-                      )
-                    ) 
+                        tabBox(
+                          title = "Squirrel Activity by age",
+                          width = 12,
+                          tabPanel("Juvenile",
+                                   plotOutput("juvenileCloud", height = "400px", width = "100%")
+                          ),
+                          tabPanel("Adult",
+                                   plotOutput("adultCloud")
+                                   
+                          )
+                        )
                   )
 
 )
