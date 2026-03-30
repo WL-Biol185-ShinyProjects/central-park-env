@@ -1,6 +1,6 @@
 library(shiny)
 library(tidyverse)
-read_csv("central_park_numeric_temp.csv")
+central_park_numeric_temp <- read_csv("central_park_numeric_temp.csv")
 
 meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                               #insert code here
@@ -48,8 +48,14 @@ meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                     box(
                       width = 8,
                        plotOutput("squirrel_color_plot1"))
-                          )
+                          ),
+                  
+                  fluidRow(
+                    
+                  )
                               )
+
+
                       
                     
                    
