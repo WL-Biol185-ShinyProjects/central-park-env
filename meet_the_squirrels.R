@@ -1,6 +1,12 @@
 library(shiny)
 library(tidyverse)
+library(lubridate)
+library(shinydashboard)
+
 central_park_numeric_temp <- read_csv("central_park_numeric_temp.csv")
+source("park_conditions_data_organization_file.R")
+
+
 
 meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                               #insert code here
@@ -39,21 +45,29 @@ meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                     
                   fluidRow(
                     box(
-                      width = 4,
-                      selectInput("select_date", "Select Date:",
-                                  choices  = c("All", as.character(sort(unique(central_park_numeric_temp$proper_date_format))), recursive=TRUE),
-                                  selected = "All",
-                                 
-                      )),
+                      width = 6,
+                      plotOutput("squirrel_color_plot2")),
+                    
                     box(
-                      width = 8,
+                      width = 6,
                        plotOutput("squirrel_color_plot1"))
                           ),
                   
                   fluidRow(
+                    box(width = 6,
+                        p("The graphs displayed here depict the primary fur colors of squirrels recorded by observers throughout the 2018 Central Park Squirrel Census. The pie chart provides a high level overview of the proportional breakdown of fur colors across all squirrels surveyed during the census period, giving a quick visual sense of which colors dominate the population. This same data is then explored in greater detail through the bar graph seen on the right, which breaks down fur color counts by individual survey day. By filtering through specific dates, we can begin to observe how the composition of squirrel fur colors shifts across the census period, offering a closer look into the diversity and distribution of the squirrel population within Central Park.")
+                    ),   
                     
-                  )
-                              )
+                    box(
+                      width = 6,
+                      selectInput("select_date", "Select Date:",
+                                  choices  = c("All", as.character(sort(unique(central_park_numeric_temp$proper_date_format))), recursive=TRUE),
+                                  selected = "All",))
+                        )
+                   
+                  
+                  
+                    )
 
 
                       
