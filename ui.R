@@ -1,6 +1,7 @@
 library(shinydashboard)
 library(shiny)
 library(leaflet)
+library(tidyverse)
 source("sidebar.R")
 source("meet_the_squirrels.R")
 source("where_are_they.R")
