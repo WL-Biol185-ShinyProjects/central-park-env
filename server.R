@@ -233,7 +233,7 @@ function(input, output) {
      ) +
      theme_minimal() +
       theme(axis.text.x = element_text(angle = 45, hjust = 1))
-  }),
+  })
 
   output$temp_activity_plot <- renderPlot({
     activity_temp <- central_park_numeric_temp %>%
