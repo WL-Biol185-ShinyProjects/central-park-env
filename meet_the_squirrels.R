@@ -4,6 +4,7 @@ library(lubridate)
 library(shinydashboard)
 
 central_park_numeric_temp <- read_csv("central_park_numeric_temp.csv")
+source("Compiled_Observation_Tables.R")
 source("park_conditions_data_organization_file.R")
 
 
