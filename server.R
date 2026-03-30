@@ -216,6 +216,24 @@ function(input, output) {
       ) 
   })
   
+  output$conditions_plot2 <- renderPlot({
+    central_park_numeric_temp %>%
+      group_by(proper_date_format) %>%
+      summarise(avg_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop") %>%
+      ggplot(aes(proper_date_format, avg_temp)) +
+      geom_point(size = 3, color = "#5BA08A") +                  # points
+      geom_line(color = "#5BA08A", linetype = "solid") +        # optional: connects the dots
+     labs(title = "Daily Average Temperature In Central Park", 
+          x = "Date", 
+           y = "Average Temperature (°F)") +
+     scale_y_continuous(limits = c(0, NA)) +   
+     scale_x_date(
+        breaks      = unique(central_park_numeric_temp$proper_date_format),
+       date_labels = "%b %d"
+     ) +
+     theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  }),
 
   output$temp_activity_plot <- renderPlot({
     activity_temp <- central_park_numeric_temp %>%
