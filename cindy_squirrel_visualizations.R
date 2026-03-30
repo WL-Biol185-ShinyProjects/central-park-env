@@ -83,4 +83,22 @@ ggplot(temp_sighters, aes(x = temp_bin, y = Total_Sighters)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+# pie chart of when people are viewing squirrels
 
+shift_sighters <- data_table %>%
+  group_by(Shift) %>%
+  summarise(Total_Sighters = sum(Number.of.sighters, na.rm = TRUE), .groups = "drop") %>%
+  mutate(Percentage = Total_Sighters / sum(Total_Sighters) * 100,
+         Label = paste0(round(Percentage, 1), "%\n(", Total_Sighters, ")"))
+
+ggplot(shift_sighters, aes(x = "", y = Total_Sighters, fill = Shift)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y") +
+  scale_fill_manual(values = c("AM" = "#5BA08A", "PM" = "#B87333")) +
+  geom_text(aes(label = Label), position = position_stack(vjust = 0.5), 
+            color = "white", size = 5) +
+  labs(
+    title = "Most Popular Time for Sighters to Squirrel Watch",
+    fill = "Time of Day"
+  ) +
+  theme_void()
