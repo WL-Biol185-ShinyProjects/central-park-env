@@ -50,13 +50,19 @@ ggplot(sighters_by_time, aes(x = Date, y = Number.of.sighters, fill = Shift)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-# histogram of weather
+# histogram of count of days and temperature
 
-ggplot(clean_temp, aes(x = numeric_temp)) +
+days_in_temp <- clean_temp %>%
+  select(Date, numeric_temp) %>%
+  mutate(Date = as.Date(as.character(Date), format = "%m%d%Y")) %>%
+  group_by(Date) %>%
+  summarise(numeric_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop")
+
+ggplot(days_in_temp, aes(x = numeric_temp)) +
   geom_histogram(binwidth = 5, fill = "#8B4513", color = "white") +
-  scale_x_continuous(breaks = seq(40, 80, by = 5), limits = c(40, 80)) +
+  scale_x_continuous(breaks = seq(50, 80, by = 5), limits = c(40, 80)) +
   labs(
-    title = "Temperature Ranges in Central Park",
+    title = "Count of Dates within Temperature Ranges",
     x = "Temperature (°F)",
     y = "Count"
   ) +
@@ -83,4 +89,22 @@ ggplot(temp_sighters, aes(x = temp_bin, y = Total_Sighters)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+# pie chart of when people are viewing squirrels
 
+shift_sighters <- data_table %>%
+  group_by(Shift) %>%
+  summarise(Total_Sighters = sum(Number.of.sighters, na.rm = TRUE), .groups = "drop") %>%
+  mutate(Percentage = Total_Sighters / sum(Total_Sighters) * 100,
+         Label = paste0(round(Percentage, 1), "%\n(", Total_Sighters, ")"))
+
+ggplot(shift_sighters, aes(x = "", y = Total_Sighters, fill = Shift)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y") +
+  scale_fill_manual(values = c("AM" = "#5BA08A", "PM" = "#B87333")) +
+  geom_text(aes(label = Label), position = position_stack(vjust = 0.5), 
+            color = "white", size = 5) +
+  labs(
+    title = "Most Popular Time for Sighters to Squirrel Watch",
+    fill = "Time of Day"
+  ) +
+  theme_void()

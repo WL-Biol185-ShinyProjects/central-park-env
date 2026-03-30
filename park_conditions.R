@@ -1,6 +1,7 @@
 library(tidyverse)
 library(shinydashboard)
 library(shiny)
+library(plotly)
 
 park_conditions <- tabItem(tabName = "park_conditions",
                            fluidRow(
@@ -34,6 +35,12 @@ park_conditions <- tabItem(tabName = "park_conditions",
                                width = 12,
                                p("This chart shows how the temperature affected the activity the squirrels were observed doing. As the temperature increased, squirrels appear to be more active. They especially engage in foraging when the weather is warmer than 50 degrees.")
                              )
-                             
-                           )
+                           ),
+                           
+                           fluidRow(
+                             box(
+                               width = 12,
+                               plotOutput("floating_plot1")
+    
+                           ))
 )

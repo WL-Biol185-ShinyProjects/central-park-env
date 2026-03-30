@@ -4,6 +4,7 @@ library(tidyverse)
 library(leaflet)
 library(leaflet.extras)
 library(ggwordcloud)
+library(plotly)
 library(dplyr, quietly = TRUE)
 
 central_park <- read_csv("central_park_og.csv")
@@ -468,5 +469,6 @@ function(input, output) {
      theme_void() +                                                        
      theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 16))
   })
+  
 }
 
