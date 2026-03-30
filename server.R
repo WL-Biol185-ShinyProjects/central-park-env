@@ -226,7 +226,7 @@ function(input, output) {
      labs(title = "Daily Average Temperature In Central Park", 
           x = "Date", 
            y = "Average Temperature (°F)") +
-     scale_y_continuous(limits = c(0, NA)) +   
+     scale_y_continuous(limits = c(40, 80)) +   
      scale_x_date(
         breaks      = unique(central_park_numeric_temp$proper_date_format),
        date_labels = "%b %d"
