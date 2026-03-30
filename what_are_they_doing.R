@@ -97,17 +97,18 @@ activity <- tabItem(tabName = "Activity",
                           "Because these observations were made in the fall, the activities observed
         align with typical squirrel activity for this time of year.")
                       ),
-                      box(
-                        title = "Squirrels in Action", status = "warning", solidHeader = TRUE,
+                      tabBox(
+                        title = "Squirrel Activity by age",
                         width = 6,
-                        tags$iframe(
-                          width = "100%", height = "300",
-                          src = "https://www.youtube.com/embed/_9ZjgeSKkeQ?si=Y9kPAVL9Bg1uuLJ0",
-                          frameborder = "0", allowfullscreen = NA,
-                          style = "border-radius: 8px;"
+                        tabPanel("Juvenile",
+                                 plotOutput("juvenileCloud")
+                        ),
+                        tabPanel("Adult",
+                                 plotOutput("adultCloud")
+                        
                         )
-                      )
-                    ),
+                    )
+                    ),  
                   fluidRow(
                     box(
                       title = "Squirrels in Action", status = "warning", solidHeader = TRUE,

@@ -3,6 +3,8 @@ library(ggplot2)
 library(tidyverse)
 library(leaflet)
 library(leaflet.extras)
+library(ggwordcloud)
+library(dplyr, quietly = TRUE)
 
 central_park <- read_csv("central_park_og.csv")
 
@@ -100,6 +102,39 @@ function(input, output) {
         plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
         axis.title = element_text(face = "bold")   # makes both axis labels bold
       )
+  })
+  
+  # creation of frequency table filtered to TRUE and consolidating to young
+  output$juvenileCloud <- renderPlot({ 
+    word_freq <- central_park_act_obs_age %>%
+      filter(did_activity == TRUE) %>%
+      filter(Age == "Juvenile") %>%
+      count(activity, name = "n") %>%
+      mutate(angle = 90 * sample(c(0,1),n(), replace = TRUE, prob = c(80, 20)))
+    
+    set.seed(35)
+    ggplot(word_freq, aes(label = activity, size = n, angle = angle)) +
+      geom_text_wordcloud(padding = 10) +
+      scale_size_area(max_size = 5) +
+      theme_minimal()
+    
+  })
+  
+  
+  # creation of frequency table filtered to TRUE and consolidating to adult
+  output$adultCloud <- renderPlot({ 
+    word_freq <- central_park_act_obs_age %>%
+      filter(did_activity == TRUE) %>%
+      filter(Age == "Adult") %>%
+      count(activity, name = "n") %>%
+      mutate(angle = 90 * sample(c(0,1),n(), replace = TRUE, prob = c(80, 20)))
+    
+    set.seed(35)
+    ggplot(word_freq, aes(label = activity, size = n, angle = angle)) +
+      geom_text_wordcloud(padding = 10) +
+      scale_size_area(max_size = 5) +
+      theme_minimal()
+    
   })
   
   output$squirrel_plot4 <- renderPlot({ 
