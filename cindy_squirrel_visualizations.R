@@ -60,11 +60,11 @@ days_in_temp <- clean_temp %>%
 
 ggplot(days_in_temp, aes(x = numeric_temp)) +
   geom_histogram(binwidth = 5, fill = "#8B4513", color = "white") +
-  scale_x_continuous(breaks = seq(50, 80, by = 5), limits = c(40, 80)) +
+  scale_x_continuous(breaks = seq(47.5, 78, by = 5), limits = c(45, 80)) +
   labs(
-    title = "Count of Dates within Temperature Ranges",
+    title = "Count of Days within Temperature Ranges",
     x = "Temperature (°F)",
-    y = "Count"
+    y = "Count of Days"
   ) +
   theme_minimal()
 
