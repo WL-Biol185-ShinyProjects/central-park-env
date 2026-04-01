@@ -290,24 +290,43 @@ function(input, output) {
       ) 
   })
 
-  output$conditions_plot4 <- renderPlot({
-    am_temp <- clean_temp %>%
-      select(Date, Shift, numeric_temp) %>%
-      mutate(Date = as.Date(as.character(Date), format = "%m%d%Y")) %>%
-      group_by(Date, Shift) %>%
-      summarise(numeric_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop") %>%
-      filter(Shift == "AM")
-    
-    ggplot(am_temp, aes(x = numeric_temp)) +
-      geom_histogram(breaks = seq(40, 75, by = 5), fill = "#8B4513", color = "white") +
-      scale_x_continuous(breaks = seq(40, 75, by = 5), limits = c(40, 75)) +
-      labs(
-        title = "Count of Days within Temperature Ranges - AM",
-        x = "Temperature (°F)",
-        y = "Count of Days"
-      ) +
-      theme_minimal()
+  output$conditions_plot4_5 <- renderPlot({
+    if (input$shift_choice == "AM") {
+      am_temp <- clean_temp %>%
+        select(Date, Shift, numeric_temp) %>%
+        mutate(Date = as.Date(as.character(Date), format = "%m%d%Y")) %>%
+        group_by(Date, Shift) %>%
+        summarise(numeric_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop") %>%
+        filter(Shift == "AM")
+      
+      ggplot(am_temp, aes(x = numeric_temp)) +
+        geom_histogram(breaks = seq(40, 75, by = 5), fill = "#8B4513", color = "white") +
+        scale_x_continuous(breaks = seq(40, 75, by = 5), limits = c(40, 75)) +
+        labs(
+          title = "Count of Days within Temperature Ranges - AM",
+          x = "Temperature (°F)",
+          y = "Count of Days"
+        ) +
+        theme_minimal()    } else {
+          pm_temp <- clean_temp %>%
+            select(Date, Shift, numeric_temp) %>%
+            mutate(Date = as.Date(as.character(Date), format = "%m%d%Y")) %>%
+            group_by(Date, Shift) %>%
+            summarise(numeric_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop") %>%
+            filter(Shift == "PM")
+          
+          ggplot(pm_temp, aes(x = numeric_temp)) +
+            geom_histogram(breaks = seq(50, 80, by = 5), fill = "#8B4513", color = "white") +
+            scale_x_continuous(breaks = seq(50, 80, by = 5), limits = c(50, 80)) +
+            labs(
+              title = "Count of Days within Temperature Ranges - PM",
+              x = "Temperature (°F)",
+              y = "Count of Days"
+            ) +
+            theme_minimal()
+    }
   })
+  
   
   output$temp_activity_plot <- renderPlot({
     activity_temp <- central_park_numeric_temp %>%
