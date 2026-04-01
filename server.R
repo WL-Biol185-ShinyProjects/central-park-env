@@ -279,17 +279,24 @@ function(input, output) {
         names_to = "activity",
         values_to = "did_activity"
       ) %>%
-      filter(did_activity == TRUE, !is.na(numeric_temp))
+      filter(did_activity == TRUE, !is.na(numeric_temp)) %>%
+      mutate(temp_range = cut(numeric_temp,        # ← groups temps into ranges
+                              breaks = seq(30, 90, by = 5),
+                              labels = c("30-35","35-40","40-45","45-50",
+                                         "50-55","55-60","60-65","65-70",
+                                         "70-75","75-80","80-85","85-90"),
+                              include.lowest = TRUE)) %>%
+      count(temp_range, activity)                  # ← count per group
     
-    ggplot(activity_temp, aes(x = numeric_temp, fill = activity)) +
-      geom_histogram(binwidth = 5, position = "dodge") +
+    ggplot(activity_temp, aes(x = temp_range, y = n, fill = activity)) +
+      geom_bar(stat = "identity", position = "stack") +  # ← stacked
       scale_fill_manual(values = c(
         "#A0522D", "#CD853F", "#DEB887", "#8B4513", "#D2691E"
       )) +
       labs(
         title = "Squirrel Activity by Temperature",
         subtitle = "Activities observed across temperature ranges in Central Park",
-        x = "Temperature (°F)",
+        x = "Temperature Range (°F)",
         y = "Number of Squirrels",
         fill = "Activity"
       ) +
@@ -298,6 +305,7 @@ function(input, output) {
         plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
         plot.subtitle = element_text(hjust = 0.5, color = "grey50"),
         axis.title = element_text(face = "bold"),
+        axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "bottom"
       )
   })
