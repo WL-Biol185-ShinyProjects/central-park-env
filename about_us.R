@@ -70,6 +70,62 @@ about_us <- tabItem(tabName = "about_us",
                       )
                     ),
                     fluidRow(
+                      box(
+                        title = "Citations",
+                        width = 12,
+                        tags$ul(
+                          tags$li(
+                            tags$a("NYC Open Data - 2018 Central Park Squirrel Census Squirrel Data",
+                                   href = "https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw/about_data",
+                                   target = "_blank")
+                          ),
+                          tags$li(
+                            tags$a("Skedaddle Wildlife - Do Squirrels Communicate with Humans",
+                                   href = "https://www.skedaddlewildlife.com/location/vaughan/blog/do-squirrels-communicate-with-humans",
+                                   target = "_blank")
+                          ),
+                          tags$li(
+                            tags$a("Wildlife Online - Squirrel Activity",
+                                   href = "https://www.wildlifeonline.me.uk/animals/article/squirrel-activity",
+                                   target = "_blank")
+                          ),
+                          tags$li(
+                            tags$a("Slate - Squirrels Express Frustration by Twitching Their Tails",
+                                   href = "https://slate.com/technology/2016/05/squirrels-express-frustration-by-twitching-their-tails-researchers-say.html",
+                                   target = "_blank")
+                          ),
+                          tags$li(
+                            tags$a("Wired - Squirrel Alarm Calls Are Surprisingly Complex",
+                                   href = "https://www.wired.com/2014/06/squirrel-alarm-calls-are-surprisingly-complex/",
+                                   target = "_blank")
+                          ),
+                          tags$li(
+                            tags$a("Nature.org - Squirrel Parkour: The Science Behind Squirrel Acrobatics",
+                                   href = "https://blog.nature.org/2021/11/16/squirrel-parkour-the-science-behind-squirrel-acrobatics/",
+                                   target = "_blank")
+                          ),
+                          tags$li(
+                            tags$a("Xeno-canto - Sciurus carolinensis",
+                                   href = "https://xeno-canto.org/species/Sciurus-carolinensis",
+                                   target = "_blank")
+                          ),
+                          tags$li(
+                            tags$a("National Wildlife Federation - 10 Nutty Facts to Make You Appreciate Squirrels",
+                                   href = "https://blog.nwf.org/2015/01/10-nutty-facts-to-make-you-appreciate-squirrels/",
+                                   target = "_blank")
+                          ),
+                          tags$li(
+                            tags$a("Wildlife Online - Why Are Some Squirrels of the Same Species Different Colours",
+                                   href = "https://www.wildlifeonline.me.uk/questions/answer/why-are-some-squirrels-of-the-same-species-different-colours",
+                                   target = "_blank")
+                          ),
+                          tags$li(
+                            "Please note: Claude was also used as a tool for code."
+                          )
+                        )
+                      ),
+                      
+                    fluidRow(
                       box(width = 12,
                           div(style = "text-align: center;",
                               tags$img(
@@ -83,4 +139,5 @@ about_us <- tabItem(tabName = "about_us",
                           )
                       )
                     )
+                  )
 )

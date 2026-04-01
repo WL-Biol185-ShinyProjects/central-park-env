@@ -12,7 +12,6 @@ and find them as fascinating as we do!
 Please see below for the dataset and the sources used as we researched our topic. 
 https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw/about_data 
 https://www.skedaddlewildlife.com/location/vaughan/blog/do-squirrels-communicate-with-humans
-/
 https://www.wildlifeonline.me.uk/animals/article/squirrel-activity#:~:text=The%20idea%20is%20that%2C%20in,the%20Red%20squirrels'%2067%25. 
 https://slate.com/technology/2016/05/squirrels-express-frustration-by-twitching-their-tails-researchers-say.html?pay=1773259232232&support_journalism=please 
 https://www.wired.com/2014/06/squirrel-alarm-calls-are-surprisingly-complex/
