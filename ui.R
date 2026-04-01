@@ -10,7 +10,6 @@ source("what_are_they_doing.R")
 source("park_conditions.R")
 source("about_us.R")
 
-
 custom_css <- tags$style(HTML("
   .skin-green .main-sidebar { background-color: #A0522D !important; }
   .skin-green .main-sidebar .sidebar-menu > li > a { color: #FFF8DC !important; }
@@ -31,6 +30,10 @@ custom_css <- tags$style(HTML("
   audio { width: 100%; margin-top: 8px; }
   .content-wrapper { background-color: #fdf8f4 !important; }
   .content { padding: 20px; }
+  @keyframes ticker {
+    0%   { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
 "))
 
 dashboardPage(skin = "green",
