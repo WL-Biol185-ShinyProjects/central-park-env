@@ -11,6 +11,7 @@ sidebar <- dashboardSidebar(title = "",
                           menuSubItem("Noise", tabName = "Noise")
                           ),
                       menuItem("Park Conditions", tabName = "park_conditions", icon = icon("cloud")),
+                      menuItem("Squirrel Name Generator", tabName = "squirrel_name_generator", icon = icon("paw")),
                       menuItem("About Us", tabName = "about_us", icon = icon("info-circle"))
                           )
 )
