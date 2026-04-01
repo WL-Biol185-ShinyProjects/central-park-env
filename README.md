@@ -18,3 +18,6 @@ https://slate.com/technology/2016/05/squirrels-express-frustration-by-twitching-
 https://www.wired.com/2014/06/squirrel-alarm-calls-are-surprisingly-complex/
 https://blog.nature.org/2021/11/16/squirrel-parkour-the-science-behind-squirrel-acrobatics/#:~:text=For%20squirrels%2C%20the%20ability%20to,world's%20best%20human%20athlete%20jealous.
 https://xeno-canto.org/species/Sciurus-carolinensis 
+https://blog.nwf.org/2015/01/10-nutty-facts-to-make-you-appreciate-squirrels/ 
+https://www.wildlifeonline.me.uk/questions/answer/why-are-some-squirrels-of-the-same-species-different-colours
+Please note: Claude was also used a tool for code.
