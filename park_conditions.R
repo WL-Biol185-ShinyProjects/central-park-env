@@ -18,9 +18,9 @@ park_conditions <- tabItem(tabName = "park_conditions",
                                  title = "Average Daily Tempertaure In Central Park",
                                  status = "warning", solidHeader = TRUE,
                                  width = 12,
-                                 p("Every time a volunteer added an entry for a squirrel, they were also asked to recorded the 
-          temperature outside during their time of observation as well as if they observed the squirrels in the
-          morning (AM) or afternoon (PM).")
+                                 p("Every time a volunteer added an entry for a squirrel, they were also asked to record the 
+          temperature outside during their time of observation. They also noted if they observed the squirrels in the
+          morning (AM) or late afternoon (PM).")
                                )
                            ),
                            fluidRow(
