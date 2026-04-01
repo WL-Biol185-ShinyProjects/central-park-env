@@ -50,7 +50,7 @@ ggplot(sighters_by_time, aes(x = Date, y = Number.of.sighters, fill = Shift)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-# histogram of count of days and temperature
+# histogram of count of days and daily avg temperature
 
 days_in_temp <- clean_temp %>%
   select(Date, numeric_temp) %>%
@@ -59,10 +59,48 @@ days_in_temp <- clean_temp %>%
   summarise(numeric_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop")
 
 ggplot(days_in_temp, aes(x = numeric_temp)) +
-  geom_histogram(binwidth = 5, fill = "#8B4513", color = "white") +
-  scale_x_continuous(breaks = seq(47.5, 78, by = 5), limits = c(45, 80)) +
+  geom_histogram(breaks = seq(50, 80, by = 5), fill = "#8B4513", color = "white") +
+  scale_x_continuous(breaks = seq(50, 80, by = 5), limits = c(50, 80)) +
   labs(
     title = "Count of Days within Temperature Ranges",
+    x = "Temperature (°F)",
+    y = "Count of Days"
+  ) +
+  theme_minimal()
+
+# histogram of count of days and am temp
+
+am_temp <- clean_temp %>%
+  select(Date, Shift, numeric_temp) %>%
+  mutate(Date = as.Date(as.character(Date), format = "%m%d%Y")) %>%
+  group_by(Date, Shift) %>%
+  summarise(numeric_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop") %>%
+  filter(Shift == "AM")
+
+ggplot(am_temp, aes(x = numeric_temp)) +
+  geom_histogram(breaks = seq(40, 75, by = 5), fill = "#8B4513", color = "white") +
+  scale_x_continuous(breaks = seq(40, 75, by = 5), limits = c(40, 75)) +
+  labs(
+    title = "Count of Days within Temperature Ranges - AM",
+    x = "Temperature (°F)",
+    y = "Count of Days"
+  ) +
+  theme_minimal()
+
+# hisotgram of count of days and pm temp
+
+pm_temp <- clean_temp %>%
+  select(Date, Shift, numeric_temp) %>%
+  mutate(Date = as.Date(as.character(Date), format = "%m%d%Y")) %>%
+  group_by(Date, Shift) %>%
+  summarise(numeric_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop") %>%
+  filter(Shift == "PM")
+
+ggplot(pm_temp, aes(x = numeric_temp)) +
+  geom_histogram(breaks = seq(50, 80, by = 5), fill = "#8B4513", color = "white") +
+  scale_x_continuous(breaks = seq(50, 80, by = 5), limits = c(50, 80)) +
+  labs(
+    title = "Count of Days within Temperature Ranges - PM",
     x = "Temperature (°F)",
     y = "Count of Days"
   ) +
