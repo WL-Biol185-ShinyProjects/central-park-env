@@ -113,10 +113,10 @@ function(input, output) {
       count(activity, name = "n") %>%
       mutate(angle = 90 * sample(c(0,1),n(), replace = TRUE, prob = c(80, 20)))
     
-    set.seed(35)
+    set.seed(42)
     ggplot(word_freq, aes(label = activity, size = n, angle = angle)) +
-      geom_text_wordcloud(padding = 10) +
-      scale_size_area(max_size = 5) +
+      geom_text_wordcloud(eccentricity = 20, grid_size = 40) +
+      scale_size_area(max_size = 20) +
       theme_minimal()
     
   })
@@ -132,8 +132,8 @@ function(input, output) {
     
     set.seed(35)
     ggplot(word_freq, aes(label = activity, size = n, angle = angle)) +
-      geom_text_wordcloud(padding = 10) +
-      scale_size_area(max_size = 5) +
+      geom_text_wordcloud(eccentricity = 20, grid_size = 40) +
+      scale_size_area(max_size = 20) +
       theme_minimal()
     
   })
