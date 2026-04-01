@@ -234,6 +234,44 @@ function(input, output) {
   
   output$conditions_plot1 <- renderPlot({
     central_park_numeric_temp %>%
+      group_by(proper_date_format) %>%
+      summarise(avg_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop") %>%
+      ggplot(aes(proper_date_format, avg_temp)) +
+      geom_point(size = 3, color = "#5BA08A") +                  # points
+      geom_line(color = "#5BA08A", linetype = "solid") +        # optional: connects the dots
+      labs(title = "Average Daily Temperature In Central Park", 
+           x = "Date", 
+           y = "Average Temperature (°F)") +
+      scale_y_continuous(limits = c(40, 80)) +   
+      scale_x_date(
+        breaks      = unique(central_park_numeric_temp$proper_date_format),
+        date_labels = "%b %d"
+      ) +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  })
+  
+  output$conditions_plot2 <- renderPlot({
+    days_in_temp <- clean_temp %>%
+      select(Date, numeric_temp) %>%
+      mutate(Date = as.Date(as.character(Date), format = "%m%d%Y")) %>%
+      group_by(Date) %>%
+      summarise(numeric_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop")
+    
+    ggplot(days_in_temp, aes(x = numeric_temp)) +
+      geom_histogram(breaks = seq(50, 80, by = 5), fill = "#8B4513", color = "white") +
+      scale_x_continuous(breaks = seq(50, 80, by = 5), limits = c(50, 80)) +
+      labs(
+        title = "Count of Days within Temperature Ranges - Daily Average",
+        x = "Temperature (°F)",
+        y = "Count of Days"
+      ) +
+      theme_minimal()
+    
+  })
+  
+  output$conditions_plot3 <- renderPlot({
+    central_park_numeric_temp %>%
       group_by(proper_date_format, Shift) %>%
       summarise(avg_temp = mean(numeric_temp, na.rm = TRUE)) %>%
       ggplot(aes(proper_date_format, avg_temp, fill = Shift)) +
@@ -250,25 +288,6 @@ function(input, output) {
       )   +
       theme(axis.text.x = element_text(angle = 45, hjust = 1)           # angled so they don't overlap
       ) 
-  })
-  
-  output$conditions_plot2 <- renderPlot({
-    central_park_numeric_temp %>%
-      group_by(proper_date_format) %>%
-      summarise(avg_temp = mean(numeric_temp, na.rm = TRUE), .groups = "drop") %>%
-      ggplot(aes(proper_date_format, avg_temp)) +
-      geom_point(size = 3, color = "#5BA08A") +                  # points
-      geom_line(color = "#5BA08A", linetype = "solid") +        # optional: connects the dots
-     labs(title = "Daily Average Temperature In Central Park", 
-          x = "Date", 
-           y = "Average Temperature (°F)") +
-     scale_y_continuous(limits = c(40, 80)) +   
-     scale_x_date(
-        breaks      = unique(central_park_numeric_temp$proper_date_format),
-       date_labels = "%b %d"
-     ) +
-     theme_minimal() +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1))
   })
 
   output$temp_activity_plot <- renderPlot({

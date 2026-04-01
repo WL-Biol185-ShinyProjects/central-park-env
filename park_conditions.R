@@ -6,12 +6,12 @@ library(plotly)
 park_conditions <- tabItem(tabName = "park_conditions",
                            fluidRow(
                              box(
-                               width = 4,
-                               plotOutput("conditions_plot2")
+                               width = 6,
+                               plotOutput("conditions_plot1")
                                 ),
                              box(
-                               width = 8,
-                               plotOutput("conditions_plot1")
+                               width = 6,
+                               plotOutput("conditions_plot2")
                            )),
                              fluidRow(
                                box(
@@ -44,3 +44,4 @@ park_conditions <- tabItem(tabName = "park_conditions",
     
                            ))
 )
+
