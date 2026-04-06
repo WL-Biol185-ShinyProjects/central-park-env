@@ -113,7 +113,7 @@ activity_summary <- central_park_numeric_temp %>%
   group_by(proper_date_format, activity) %>%
   summarise(count = n(), .groups = "drop") %>%
   slice_max(count, n = 1, by = proper_date_format) %>%
-  select(proper_date_format, most_common_activity = activity)
+  select(proper_date_format, most_common_activity = activity),
 
 # Step 2: Most common noise per day
 noise_summary <- central_park_numeric_temp %>%
@@ -141,7 +141,7 @@ squirrel_summary <- central_park_numeric_temp %>%
   ) %>%
   arrange(proper_date_format) %>%
   left_join(activity_summary, by = "proper_date_format") %>%
-  left_join(noise_summary, by = "proper_date_format")
+  left_join(noise_summary, by = "proper_date_format"),
 
 # Step 4: Build hover text as vertical list
 squirrel_summary <- squirrel_summary %>%
@@ -154,7 +154,7 @@ squirrel_summary <- squirrel_summary %>%
     "🎨 Most Common Fur: ", most_common_fur, "<br>",
     "🏃 Most Common Activity: ", most_common_activity, "<br>",
     "🔊 Most Common Noise: ", most_common_noise
-  ))
+  )),
 
 # Step 5: Plot
 plot_ly(
@@ -175,18 +175,151 @@ plot_ly(
       font = list(size = 13)
     )
   )
-```
 
-When you hover over each bar it will show a clean vertical list like:
-  ```
-Date: 2018-10-06
-─────────────────
-🐿️ Squirrels: 342
-🌡️ Avg Temp: 65.2°F
-⏱️ Avg Sighting Time: 11.4 sec
-🎨 Most Common Fur: Gray
-🏃 Most Common Activity: Foraging
-🔊 Most Common Noise: Kuks
+
+#new version:
+library(dplyr)
+library(plotly)
+library(tidyr)
+
+# Step 1: Most common activity per day
+activity_summary <- central_park_numeric_temp %>%
+  select(proper_date_format, Running, Chasing, Climbing, Eating, Foraging) %>%
+  pivot_longer(
+    cols = c(Running, Chasing, Climbing, Eating, Foraging),
+    names_to = "activity",
+    values_to = "did_activity"
+  ) %>%
+  filter(did_activity == TRUE, !is.na(proper_date_format)) %>%
+  group_by(proper_date_format, activity) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  slice_max(count, n = 1, by = proper_date_format) %>%
+  select(proper_date_format, most_common_activity = activity)
+
+# Step 2: Most common noise per day
+noise_summary <- central_park_numeric_temp %>%
+  select(proper_date_format, Kuks, Quaas, Moans) %>%
+  pivot_longer(
+    cols = c(Kuks, Quaas, Moans),
+    names_to = "noise",
+    values_to = "made_noise"
+  ) %>%
+  filter(made_noise == TRUE, !is.na(proper_date_format)) %>%
+  group_by(proper_date_format, noise) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  slice_max(count, n = 1, by = proper_date_format) %>%
+  select(proper_date_format, most_common_noise = noise)
+
+# Step 3: Main summary table
+squirrel_summary <- central_park_numeric_temp %>%
+  group_by(proper_date_format) %>%
+  summarise(
+    squirrel_count = n(),
+    avg_temp = round(mean(numeric_temp, na.rm = TRUE), 1),
+    avg_sighting_time = round(mean(Total_Time_of_Sighting, na.rm = TRUE), 1),
+    most_common_fur = names(sort(table(Primary_Fur_Color), decreasing = TRUE))[1],
+    .groups = "drop"
+  ) %>%
+  arrange(proper_date_format) %>%
+  left_join(activity_summary, by = "proper_date_format") %>%
+  left_join(noise_summary, by = "proper_date_format")
+
+# Step 4: Plot with ggplotly
+p <- ggplot(squirrel_summary, aes(
+  x = proper_date_format,
+  y = squirrel_count,
+  text = paste0(
+    "Date: ", proper_date_format, "\n",
+    "Squirrels: ", squirrel_count, "\n",
+    "Avg Temp: ", avg_temp, "°F\n",
+    "Avg Sighting Time: ", avg_sighting_time, " sec\n",
+    "Most Common Fur: ", most_common_fur, "\n",
+    "Most Common Activity: ", most_common_activity, "\n",
+    "Most Common Noise: ", most_common_noise
+  )
+)) +
+  geom_bar(stat = "identity", fill = "brown") +
+  labs(
+    title = "Squirrel Entries per Day - Central Park Census",
+    x = "Date",
+    y = "Number of Squirrels"
+  ) +
+  theme_minimal()
+
+ggplotly(p, tooltip = "text")
    
-   
-   
+#in server  
+output$squirrel_plotly <- renderPlotly({
+# Step 1: Most common activity per day
+activity_summary <- central_park_numeric_temp %>%
+  select(proper_date_format, Running, Chasing, Climbing, Eating, Foraging) %>%
+  pivot_longer(
+    cols = c(Running, Chasing, Climbing, Eating, Foraging),
+    names_to = "activity",
+    values_to = "did_activity"
+  ) %>%
+  filter(did_activity == TRUE, !is.na(proper_date_format)) %>%
+  group_by(proper_date_format, activity) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  slice_max(count, n = 1, by = proper_date_format) %>%
+  select(proper_date_format, most_common_activity = activity)
+
+# Step 2: Most common noise per day
+noise_summary <- central_park_numeric_temp %>%
+  select(proper_date_format, Kuks, Quaas, Moans) %>%
+  pivot_longer(
+    cols = c(Kuks, Quaas, Moans),
+    names_to = "noise",
+    values_to = "made_noise"
+  ) %>%
+  filter(made_noise == TRUE, !is.na(proper_date_format)) %>%
+  group_by(proper_date_format, noise) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  slice_max(count, n = 1, by = proper_date_format) %>%
+  select(proper_date_format, most_common_noise = noise)
+
+# Step 3: Main summary table
+squirrel_summary <- central_park_numeric_temp %>%
+  group_by(proper_date_format) %>%
+  summarise(
+    squirrel_count = n(),
+    avg_temp = round(mean(numeric_temp, na.rm = TRUE), 1),
+    avg_sighting_time = round(mean(Total_Time_of_Sighting, na.rm = TRUE), 1),
+    most_common_fur = names(sort(table(Primary_Fur_Color), decreasing = TRUE))[1],
+    .groups = "drop"
+  ) %>%
+  arrange(proper_date_format) %>%
+  left_join(activity_summary, by = "proper_date_format") %>%
+  left_join(noise_summary, by = "proper_date_format")
+
+# Step 4: Plot
+p <- ggplot(squirrel_summary, aes(
+  x = proper_date_format,
+  y = squirrel_count,
+  text = paste0(
+    "Date: ", proper_date_format, "\n",
+    "Squirrels: ", squirrel_count, "\n",
+    "Avg Temp: ", avg_temp, "°F\n",
+    "Avg Sighting Time: ", avg_sighting_time, " sec\n",
+    "Most Common Fur: ", most_common_fur, "\n",
+    "Most Common Activity: ", most_common_activity, "\n",
+    "Most Common Noise: ", most_common_noise
+  )
+)) +
+  geom_bar(stat = "identity", fill = "brown") +
+  labs(
+    title = "Squirrel Entries per Day - Central Park Census",
+    x = "Date",
+    y = "Number of Squirrels"
+  ) +
+  theme_minimal()
+
+ggplotly(p, tooltip = "text")
+})  
+
+#in UI
+fluidRow(
+  box(title = "Squirrel Count & Daily Summary",
+      status = "warning", solidHeader = TRUE,
+      width = 12, plotlyOutput("squirrel_plotly"))
+)
