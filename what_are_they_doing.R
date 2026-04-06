@@ -85,7 +85,7 @@ activity <- tabItem(tabName = "Activity",
                     fluidRow(
                       box(
                         title = "Activity Observations", status = "warning", solidHeader = TRUE,
-                        width = 6, height = "300px",
+                        width = 6, height = "370px",
                         p("When the squirrel observer volunteers were monitoring squirrels,
         they took note of the activity the squirrel engaged in. The observers
         described the squirrels as foraging, eating, running, climbing, chasing.",
