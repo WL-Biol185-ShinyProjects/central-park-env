@@ -51,5 +51,10 @@ park_conditions <- tabItem(tabName = "park_conditions",
                              box(title = "Squirrel Activity by Temperature",
                                  status = "warning", solidHeader = TRUE,
                                  width = 12, plotOutput("temp_activity_plot", height = 350))
-                           ))
+                           )
+                       
+                           
+                           
+                           
+                           )
 

@@ -5,6 +5,7 @@ library(leaflet)
 library(leaflet.extras)
 library(ggwordcloud)
 library(plotly)
+library(tidyr)
 library(dplyr, quietly = TRUE)
 
 central_park <- read_csv("central_park_og.csv")
@@ -483,5 +484,7 @@ function(input, output) {
     )
     output$squirrel_name <- renderText({ name })
   })
+
+  
   
 }
