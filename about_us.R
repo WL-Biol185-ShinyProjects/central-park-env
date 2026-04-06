@@ -19,7 +19,7 @@ about_us <- tabItem(tabName = "about_us",
                                    p("Ava Grace Flory is a senior Biology and Environmental Studies double major
             who plans to pursue an MD/PhD with a focus on infectious disease. After graduation 
             she hopes to work in zoonotic disease research. She finds squirrels interesting because
-            of the risk of disease transmission from squirrels to humans.")
+            of the risk of disease transmission from squirrels to humans. Fun fact-squirrel was her first word!")
                             )
                           ),
                           hr(),
