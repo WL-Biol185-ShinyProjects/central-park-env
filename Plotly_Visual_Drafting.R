@@ -148,12 +148,12 @@ squirrel_summary <- squirrel_summary %>%
   mutate(hover_text = paste0(
     "<b>Date: ", proper_date_format, "</b><br>",
     "─────────────────<br>",
-    "🐿️ Squirrels: ", squirrel_count, "<br>",
-    "🌡️ Avg Temp: ", avg_temp, "°F<br>",
-    "⏱️ Avg Sighting Time: ", avg_sighting_time, " sec<br>",
-    "🎨 Most Common Fur: ", most_common_fur, "<br>",
-    "🏃 Most Common Activity: ", most_common_activity, "<br>",
-    "🔊 Most Common Noise: ", most_common_noise
+    "Squirrels: ", squirrel_count, "<br>",
+    "Avg Temp: ", avg_temp, "°F<br>",
+    "Avg Sighting Time: ", avg_sighting_time, " sec<br>",
+    "Most Common Fur: ", most_common_fur, "<br>",
+    "Most Common Activity: ", most_common_activity, "<br>",
+    "Most Common Noise: ", most_common_noise
   )),
 
 # Step 5: Plot
@@ -248,7 +248,7 @@ p <- ggplot(squirrel_summary, aes(
 
 ggplotly(p, tooltip = "text")
    
-#in server  
+#in server back to original plot_ly  
 output$squirrel_plotly <- renderPlotly({
 # Step 1: Most common activity per day
 activity_summary <- central_park_numeric_temp %>%
@@ -292,29 +292,38 @@ squirrel_summary <- central_park_numeric_temp %>%
   left_join(activity_summary, by = "proper_date_format") %>%
   left_join(noise_summary, by = "proper_date_format")
 
-# Step 4: Plot
-p <- ggplot(squirrel_summary, aes(
-  x = proper_date_format,
-  y = squirrel_count,
-  text = paste0(
-    "Date: ", proper_date_format, "\n",
-    "Squirrels: ", squirrel_count, "\n",
-    "Avg Temp: ", avg_temp, "°F\n",
-    "Avg Sighting Time: ", avg_sighting_time, " sec\n",
-    "Most Common Fur: ", most_common_fur, "\n",
-    "Most Common Activity: ", most_common_activity, "\n",
+# Step 4: Build hover text as vertical list
+squirrel_summary <- squirrel_summary %>%
+  mutate(hover_text = paste0(
+    "<b>Date: ", proper_date_format, "</b><br>",
+    "─────────────────<br>",
+    "Squirrels: ", squirrel_count, "<br>",
+    "Avg Temp: ", avg_temp, "°F<br>",
+    "Avg Sighting Time: ", avg_sighting_time, " sec<br>",
+    "Most Common Fur: ", most_common_fur, "<br>",
+    "Most Common Activity: ", most_common_activity, "<br>",
     "Most Common Noise: ", most_common_noise
-  )
-)) +
-  geom_bar(stat = "identity", fill = "brown") +
-  labs(
-    title = "Squirrel Entries per Day - Central Park Census",
-    x = "Date",
-    y = "Number of Squirrels"
-  ) +
-  theme_minimal()
+  ))
 
-ggplotly(p, tooltip = "text")
+# Step 5: Plot
+plot_ly(
+  squirrel_summary,
+  x = squirrel_summary$proper_date_format,
+  y = squirrel_summary$squirrel_count,
+  type = "bar",
+  marker = list(color = "brown"),
+  text = squirrel_summary$hover_text,
+  hoverinfo = "text"
+) %>%
+  layout(
+    title = "Daily Squirrel Count & Summary",
+    xaxis = list(title = "Date"),
+    yaxis = list(title = "Number of Squirrels"),
+    hoverlabel = list(
+      bgcolor = "white",
+      font = list(size = 13)
+    )
+  )
 })  
 
 #in UI
