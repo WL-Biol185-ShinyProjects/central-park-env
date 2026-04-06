@@ -24,7 +24,7 @@ attitude <- tabItem(tabName = "Attitude",
                           br(), br(),
                           "When squirrels feel threatened, their response is often to escape or run away
         from the threat, however, in an urban area like Central Park, squirrels may be
-        used to human activity, altering their responses to human activity. This attitude
+        used to or tolerate human activity, altering their responses to to an observer. This attitude
         alteration may account for the majority of squirrels indifference to the
         observer's presence.",
                           br(), br(),
@@ -143,7 +143,7 @@ noise <- tabItem(tabName = "Noise",
                        "Kuks are noises that signal to other squirrels that there could be predators
         around or may indicate the squirrel is annoyed. Quaas are another sound that
         alert squirrels of predators which can include humans. Moans also signal
-        predators but are typically vocalized in response to lower-threat predators.
+        predators, but are typically vocalized in response to lower-threat predators.
         Since all of these noises signal some level of agitation or fear, they are
         typically paired with the tail twitches.",
                        br(), br(),
