@@ -30,7 +30,7 @@ about_us <- tabItem(tabName = "about_us",
                             ),
                             column(width = 10,
                                    h3("Cindy Xie"),
-                                   p("Cindy is a senior Econ major and a double minor in Data Science and Chinese. 
+                                   p("Cindy is a senior Economics major and a double minor in Data Science and Chinese. 
             She will be in D.C. after graduation working at a consulting firm. She hopes to
             use her data analysis skills to help in the policy world in the future. She thinks
             building our NYC squirrels webapp is a fun way to build her R skills!")
@@ -64,7 +64,7 @@ about_us <- tabItem(tabName = "about_us",
             minor hoping to pursue an MD/PhD with a focus in innovative drug delivery systems
             and pediatric oncology. She enjoys spending time outdoors and finds the behavior
             and complexity of social interactions between little critters astonishing, so she
-            has found these datasets on central park squirrels fun to dive into and analyze!")
+            has found these datasets on Central Park Squirrels fun to dive into and analyze!")
                             )
                           )
                       )

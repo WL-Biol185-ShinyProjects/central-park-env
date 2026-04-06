@@ -33,17 +33,17 @@ meet_the_squirrels <- tabItem(tabName = "meet_the_squirrels",
                               fluidRow(
                                 box(
                                   title = "About the Squirrels", width = 12,
-                                  p("This app focuses on an open access data set compiled by the 2018 squirrel census available through NYC open data. This data set was collected through 323 volunteer squirrel sighters in October of 2018 and findings regarding the population size of a particular grey squirrel species (sciurus carolinensis) within Central Park. However, there is so much more to the Central Park squirrel community than just the number of eastern grey squirrels present, and it is those dynamics that you can see here!")
+                                  p("This app focuses on an open access data set compiled by the 2018 Squirrel Census available through NYC Open Data. This data set was collected through 323 volunteer squirrel sighters in October of 2018 and contains data regarding the population size of a particular grey squirrel species (sciurus carolinensis) within Central Park. However, there is so much more to the Central Park squirrel community than just the number of Eastern grey squirrels present, and it is those dynamics that you can see here!")
                                 )
                               ),
                               fluidRow(
                                 box(
                                   title = "Central Park Squirrels", width = 6,
-                                  p("It is expected that over 2000 Eastern grey squirrels call central park home. Since their introduction to the park in the 1870's they have become treasured icons among the park's residents. These city squirrels are primarily grey with some variations being black and cinnamon which will be reflected in the data. While park visitors are now discouraged from feeding the squirrels they remain fairly comfortable around them allowing for excellent observation within the park.")
+                                  p("It is expected that over 2000 Eastern grey squirrels call central park home. Since their introduction to the park in the 1870's, they have become treasured icons among the park's residents. These city squirrels are primarily grey with some variations like black and cinnamon which will be reflected in the data. While park visitors are now discouraged from feeding the squirrels, they remain fairly comfortable around people allowing for excellent observation within the park.")
                                 ),
                                 box(
                                   title = "What to Expect", width = 6,
-                                  p("On this site you will find a variety of data concerning eastern grey squirrels from observations of their behavior, where they are and what the weather was like at the time of their sighting. This site then takes that data a step further bringing different elements together to tell a full story for squirrels in central park.")
+                                  p("On this site, you will find a variety of data concerning Eastern grey squirrels from observations of their behavior, where they were, and what the weather was like at the time of their sighting. This site then takes that data a step further bringing different elements together to tell a full story for squirrels in Central Park.")
                                 )
                               ),
                               fluidRow(
