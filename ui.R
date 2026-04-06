@@ -10,6 +10,8 @@ source("what_are_they_doing.R")
 source("park_conditions.R")
 source("about_us.R")
 source("squirrel_name_generator.R")    
+source("squirrel_quiz.R")
+
 
 custom_css <- tags$style(HTML("
   .skin-green .main-sidebar { background-color: #A0522D !important; }
@@ -50,7 +52,8 @@ dashboardPage(skin = "green",
                   tail_behavior,
                   noise,
                   park_conditions,
-                  squirrel_name_generator,        
+                  squirrel_name_generator,
+                  squirrel_quiz,
                   about_us
                 )
               )

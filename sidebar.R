@@ -12,7 +12,9 @@ sidebar <- dashboardSidebar(title = "",
                           ),
                       menuItem("Park Conditions", tabName = "park_conditions", icon = icon("cloud")),
                       menuItem("Squirrel Name Generator", tabName = "squirrel_name_generator", icon = icon("paw")),
+                      menuItem("Squirrel Quiz", tabName = "squirrel_quiz", icon = icon("pen")),
                       menuItem("About Us", tabName = "about_us", icon = icon("info-circle"))
+                      
                           )
 )
 
